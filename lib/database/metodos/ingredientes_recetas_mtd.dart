@@ -4,6 +4,31 @@ import 'package:dulce_precision/database/dp_db.dart'; // Importamos el helper de
 import 'package:dulce_precision/models/db_model.dart'; // Importamos el modelo IngredienteReceta
 
 class IngredienteRecetaRepository {
+  // Método para obtener un ingrediente por su ID
+  Future<IngredienteReceta> getIngredienteById(int idIngrediente) async {
+    try {
+      final db = await DatabaseHelper()
+          .database; // Obtenemos la instancia de la base de datos
+      final List<Map<String, dynamic>> maps = await db.query(
+        'ingredientesRecetas', // Nombre de la tabla
+        where: 'idIngrediente = ?', // Condición para buscar el ingrediente
+        whereArgs: [idIngrediente], // Argumento para el ID del ingrediente
+      );
+
+      if (maps.isNotEmpty) {
+        return IngredienteReceta.fromMap(
+            maps.first); // Retorna el ingrediente si se encuentra
+      } else {
+        throw Exception('Ingrediente no encontrado'); // Manejo de errores
+      }
+    } catch (e) {
+      // Si ocurre un error, lo registramos y lanzamos una excepción
+      CustomLogger()
+          .logError('Error al obtener ingrediente con id $idIngrediente: $e');
+      throw Exception("Error al obtener producto");
+    }
+  }
+  
   // Método para obtener todos los ingredientes de la tabla
   Future<List<IngredienteReceta>> getAllIngredientes() async {
     final db = await DatabaseHelper()
@@ -40,30 +65,6 @@ class IngredienteRecetaRepository {
     }
   }
 
-  // Método para obtener un ingrediente por su ID
-  Future<IngredienteReceta> getIngredienteById(int idIngrediente) async {
-    try {
-      final db = await DatabaseHelper()
-          .database; // Obtenemos la instancia de la base de datos
-      final List<Map<String, dynamic>> maps = await db.query(
-        'ingredientesRecetas', // Nombre de la tabla
-        where: 'idIngrediente = ?', // Condición para buscar el ingrediente
-        whereArgs: [idIngrediente], // Argumento para el ID del ingrediente
-      );
-
-      if (maps.isNotEmpty) {
-        return IngredienteReceta.fromMap(
-            maps.first); // Retorna el ingrediente si se encuentra
-      } else {
-        throw Exception('Ingrediente no encontrado'); // Manejo de errores
-      }
-    } catch (e) {
-      // Si ocurre un error, lo registramos y lanzamos una excepción
-      CustomLogger()
-          .logError('Error al obtener ingrediente con id $idIngrediente: $e');
-      throw Exception("Error al obtener producto");
-    }
-  }
 
   // Método para eliminar un ingrediente
   Future<void> eliminarIngrediente(int idIngrediente) async {

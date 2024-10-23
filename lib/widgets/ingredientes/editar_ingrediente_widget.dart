@@ -6,14 +6,13 @@ import 'package:dulce_precision/models/theme_model.dart';
 import 'package:dulce_precision/models/font_size_model.dart';
 import 'package:dulce_precision/database/metodos/ingredientes_recetas_mtd.dart';
 import 'package:dulce_precision/database/providers/ingredientes_provider.dart';
-import 'package:dulce_precision/widgets/agregar_ingrediente_widget.dart';
+import 'package:dulce_precision/widgets/ingredientes/agregar_ingrediente_widget.dart';
 import 'package:dulce_precision/widgets/tipo_unidad_dropdown.dart';
 
 class EditarIngredientesWidget extends StatefulWidget {
   final int idReceta;
 
-  EditarIngredientesWidget({Key? key, required this.idReceta})
-      : super(key: key);
+  const EditarIngredientesWidget({super.key, required this.idReceta});
 
   @override
   EditarIngredientesWidgetState createState() =>
@@ -68,14 +67,14 @@ class EditarIngredientesWidgetState extends State<EditarIngredientesWidget> {
 
     return Column(
       children: [
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         ..._ingredientes
             .map((ingrediente) =>
                 _buildIngredienteItem(ingrediente, themeModel, fontSizeModel))
-            .toList(),
-        SizedBox(height: 20),
+            ,
+        const SizedBox(height: 20),
         AgregarIngredientesWidget(key: _agregarIngredientesKey),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
       ],
     );
   }
@@ -90,7 +89,7 @@ class EditarIngredientesWidgetState extends State<EditarIngredientesWidget> {
     CustomLogger().logInfo('Tipo de Unidad: $tipoUnidad');
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         children: [
           Row(
@@ -127,7 +126,7 @@ class EditarIngredientesWidgetState extends State<EditarIngredientesWidget> {
                   ),
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               IconButton(
                 icon: Icon(Icons.remove_circle,
                     color: themeModel.secondaryButtonColor.withOpacity(0.6)),
@@ -149,7 +148,7 @@ class EditarIngredientesWidgetState extends State<EditarIngredientesWidget> {
                   },
                   child: TextField(
                     controller: cantidadController,
-                    decoration: InputDecoration(labelText: 'Cantidad'),
+                    decoration: const InputDecoration(labelText: 'Cantidad'),
                     keyboardType: TextInputType.number,
                     style: TextStyle(
                         fontSize: fontSizeModel.textSize,
@@ -157,7 +156,7 @@ class EditarIngredientesWidgetState extends State<EditarIngredientesWidget> {
                   ),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Expanded(
                 child: TipoUnidadDropdown(
                   initialValue: tipoUnidad,
@@ -171,7 +170,7 @@ class EditarIngredientesWidgetState extends State<EditarIngredientesWidget> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
     );
@@ -212,7 +211,7 @@ class EditarIngredientesWidgetState extends State<EditarIngredientesWidget> {
           .eliminarIngrediente(idIngrediente);
       await _cargarIngredientes();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Ingrediente eliminado con éxito')),
+        const SnackBar(content: Text('Ingrediente eliminado con éxito')),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

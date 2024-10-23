@@ -84,8 +84,8 @@ Future<void> mostrarContenidoRecetaModal(
                                       color: themeModel.primaryTextColor),
                                 ),
                               ))
-                          .toList(),
-                      SizedBox(height: 10),
+                          ,
+                      const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15,
@@ -121,7 +121,7 @@ Future<void> mostrarContenidoRecetaModal(
                     vertical: 16), // Padding para el botón "Cerrar"
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(double.infinity, 40),
+                    minimumSize: const Size(double.infinity, 40),
                     backgroundColor: themeModel.primaryButtonColor,
                     foregroundColor: themeModel.primaryTextColor,
                   ),

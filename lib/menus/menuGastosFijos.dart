@@ -8,6 +8,8 @@ import 'package:dulce_precision/screens/settings/settings_screen.dart'; // Impor
 import 'package:provider/provider.dart'; // Importa la librería de provider
 
 class MenuGastosFijos extends StatelessWidget {
+  const MenuGastosFijos({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Obtenemos el modelo de tema y tamaño de fuente
@@ -29,7 +31,7 @@ class MenuGastosFijos extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SettingsScreen(),
+                builder: (context) => const SettingsScreen(),
               ),
             );
             break;
@@ -47,7 +49,7 @@ class MenuGastosFijos extends StatelessWidget {
 
                 // Muestra un mensaje de éxito si es necesario
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Todos los gastos fijos han sido eliminados.')),
+                  const SnackBar(content: Text('Todos los gastos fijos han sido eliminados.')),
                 );
               } catch (e) {
                 // Manejo del error

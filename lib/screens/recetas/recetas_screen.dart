@@ -10,6 +10,8 @@ import 'package:dulce_precision/models/theme_model.dart';
 import 'package:dulce_precision/database/providers/recetas_provider.dart';
 
 class RecetasScreen extends StatefulWidget {
+  const RecetasScreen({super.key});
+
   @override
   _RecetasScreenState createState() => _RecetasScreenState();
 }
@@ -40,7 +42,7 @@ class _RecetasScreenState extends State<RecetasScreen> {
             .eliminarReceta(idReceta);
         // Mostramos un mensaje de éxito
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Receta eliminada con éxito!')),
+          const SnackBar(content: Text('Receta eliminada con éxito!')),
         );
       } catch (e) {
         // Mostramos un mensaje de error si ocurre una excepción
@@ -80,7 +82,7 @@ class _RecetasScreenState extends State<RecetasScreen> {
 
               return Card(
                 elevation: 2,
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -88,14 +90,14 @@ class _RecetasScreenState extends State<RecetasScreen> {
                     children: [
                       // Primera fila: Nombre de la receta
                       Text(
-                        '${receta.nombreReceta}',
+                        receta.nombreReceta,
                         style: TextStyle(
                           fontSize: fontSizeModel.textSize,
                           color: themeModel.secondaryTextColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       // Segunda fila: Precio y botón "Detalles"
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -119,7 +121,7 @@ No se puede calcular'''
                               mostrarDetallesModal(context, receta.idReceta);
                             },
                             child: Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 3),
                               // decoration: BoxDecoration(
                               //   color: themeModel.primaryButtonColor,
@@ -132,7 +134,7 @@ No se puede calcular'''
                                     size: fontSizeModel.iconSize * 0.7,
                                     color: themeModel.primaryIconColor,
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Text(
                                     'Detalles',
                                     style: TextStyle(
@@ -140,7 +142,7 @@ No se puede calcular'''
                                       color: themeModel.secondaryTextColor,
                                     ),
                                   ),
-                                  SizedBox(width: 4),
+                                  const SizedBox(width: 4),
                                   Icon(
                                     Icons.visibility,
                                     size: fontSizeModel.iconSize * 0.7,
@@ -152,7 +154,7 @@ No se puede calcular'''
                           ),
                         ],
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       // Tercera fila: Botones "Editar", "Borrar" y "Ver"
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -181,7 +183,7 @@ No se puede calcular'''
                               ),
                             ),
                           ),
-                          SizedBox(width: 4),
+                          const SizedBox(width: 4),
                           Expanded(
                             flex: 3, // Proporción para el botón "Editar"
                             child: ElevatedButton(
@@ -209,7 +211,7 @@ No se puede calcular'''
                               ),
                             ),
                           ),
-                          SizedBox(width: 4),
+                          const SizedBox(width: 4),
                           Expanded(
                             flex: 3, // Proporción para el botón "Borrar"
                             child: ElevatedButton(

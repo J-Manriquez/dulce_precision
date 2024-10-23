@@ -1,4 +1,4 @@
-// Archivo: menus/custom_bottom_navigation_bar.dart
+//Archivo: menus/custom_bottom_navigation_bar.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/theme_model.dart'; // Importa el modelo de tema
@@ -10,10 +10,10 @@ class CustomNavigationBar extends StatelessWidget {
       onItemTapped; // Función de callback para la selección de elementos
 
   const CustomNavigationBar({
-    Key? key,
+    super.key,
     required this.selectedIndex, // Requiere el índice seleccionado
     required this.onItemTapped, // Requiere la función de callback
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ class ObtenerGastosFijosWG extends StatefulWidget {
   final Function(double porcentaje, double totalPorcentaje,
       List<GastoCalculado> detalleGastos) onGastoConfirmado;
 
-  ObtenerGastosFijosWG({required this.onGastoConfirmado});
+  const ObtenerGastosFijosWG({super.key, required this.onGastoConfirmado});
 
   @override
   _ObtenerGastosFijosWGState createState() => _ObtenerGastosFijosWGState();
@@ -25,7 +25,7 @@ class GastoCalculado {
 }
 
 class _ObtenerGastosFijosWGState extends State<ObtenerGastosFijosWG> {
-  List<int> _selectedGastosIds = [];
+  final List<int> _selectedGastosIds = [];
   List<GastoCalculado> _gastosCalculados = [];
   double _totalPorcentaje = 0.0;
   double _porcentaje = 0.0;
@@ -81,20 +81,9 @@ class _ObtenerGastosFijosWGState extends State<ObtenerGastosFijosWG> {
             Row(
               children: [
                 Expanded(
-                  child: //TextField(
-                      //   keyboardType: TextInputType.numberWithOptions(decimal: true),
-                      //   onChanged: (value) {
-                      //     setState(() {
-                      //       _porcentaje = double.tryParse(value) ?? 0.0;
-                      //     });
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     labelText: 'Porcentaje (%)',
-                      //     border: OutlineInputBorder(),
-                      //   ),
-                      // ),
+                  child: 
                       CustomTextField(
-                    keyboardType: TextInputType.numberWithOptions(
+                    keyboardType: const TextInputType.numberWithOptions(
                         decimal:
                             true), // Permite entrada de números con decimales
                     onChanged: (value) {
@@ -103,33 +92,33 @@ class _ObtenerGastosFijosWGState extends State<ObtenerGastosFijosWG> {
                             0.0; // Actualiza la variable con el valor ingresado o 0 si es inválido
                       });
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText:
                           'Porcentaje (%)', // Etiqueta del campo de texto
                       border: OutlineInputBorder(), // Borde del campo de texto
                     ),
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 ElevatedButton(
                   onPressed: _calcularGastosSeleccionados,
-                  child: Text(
-                    'Calcular',
-                    style: TextStyle(fontSize: fontSizeModel.textSize),
-                  ),
                   style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(
                           themeModel.primaryButtonColor),
                       foregroundColor:
                           WidgetStateProperty.all(themeModel.primaryTextColor)),
+                  child: Text(
+                    'Calcular',
+                    style: TextStyle(fontSize: fontSizeModel.textSize),
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             gastoFijoProvider.gastosFijos.isEmpty
                 ? _buildEmptyState()
                 : _buildGastoFijoList(gastoFijoProvider),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -143,15 +132,15 @@ class _ObtenerGastosFijosWGState extends State<ObtenerGastosFijosWG> {
                 widget.onGastoConfirmado(
                     _porcentaje, _totalPorcentaje, gastosSeleccionados);
               },
-              child: Text(
-                'Confirmar Selección',
-                style: TextStyle(fontSize: fontSizeModel.textSize),
-              ),
               style: ButtonStyle(
                   backgroundColor:
                       WidgetStateProperty.all(themeModel.primaryButtonColor),
                   foregroundColor:
                       WidgetStateProperty.all(themeModel.primaryTextColor)),
+              child: Text(
+                'Confirmar Selección',
+                style: TextStyle(fontSize: fontSizeModel.textSize),
+              ),
             ),
           ],
         );
@@ -160,7 +149,7 @@ class _ObtenerGastosFijosWGState extends State<ObtenerGastosFijosWG> {
   }
 
   Widget _buildEmptyState() {
-    return Center(
+    return const Center(
       child: Text(
         'No se encontraron gastos fijos, puedes crearlos desde el menu',
         style: TextStyle(fontSize: 16),
@@ -174,16 +163,16 @@ class _ObtenerGastosFijosWGState extends State<ObtenerGastosFijosWG> {
     final fontSizeModel = Provider.of<FontSizeModel>(context);
     return ListView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: gastoFijoProvider.gastosFijos.length,
       itemBuilder: (context, index) {
         final gasto = gastoFijoProvider.gastosFijos[index];
         final valorCalculado = _getValorCalculado(gasto);
 
         return Card(
-          margin: EdgeInsets.symmetric(vertical: 4.0),
+          margin: const EdgeInsets.symmetric(vertical: 4.0),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               children: [
                 Transform.scale(
@@ -227,7 +216,7 @@ class _ObtenerGastosFijosWGState extends State<ObtenerGastosFijosWG> {
                 Expanded(
                   flex: 4,
                   child: Padding(
-                    padding: EdgeInsets.only(right: 4.0, left: 8.0),
+                    padding: const EdgeInsets.only(right: 4.0, left: 8.0),
                     child: Text(
                       _calculosActualizados
                           ? '\$${valorCalculado.round()}'
@@ -255,7 +244,7 @@ class _ObtenerGastosFijosWGState extends State<ObtenerGastosFijosWG> {
       children: [
         CustomTextField(
           readOnly: true, // El campo de texto es de solo lectura
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Resumen de cálculos', // Etiqueta del campo de texto
             border: OutlineInputBorder(), // Borde del campo de texto
           ),
@@ -265,10 +254,10 @@ class _ObtenerGastosFijosWGState extends State<ObtenerGastosFijosWG> {
                 'Total calculado: \$${_totalPorcentaje.toStringAsFixed(2)}',
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         CustomTextField(
           readOnly: true, // El campo de texto es de solo lectura
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText:
                 'Detalle de gastos seleccionados', // Etiqueta del campo de texto
             border: OutlineInputBorder(), // Borde del campo de texto

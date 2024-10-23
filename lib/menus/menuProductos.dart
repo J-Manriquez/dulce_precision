@@ -8,6 +8,8 @@ import 'package:dulce_precision/screens/settings/settings_screen.dart'; // Impor
 import 'package:provider/provider.dart'; // Importa la pantalla de recetas
 
 class MenuProductos extends StatelessWidget {
+  const MenuProductos({super.key});
+
   @override
   Widget build(BuildContext context) {
     final themeModel =
@@ -29,7 +31,7 @@ class MenuProductos extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SettingsScreen(),
+                builder: (context) => const SettingsScreen(),
               ),
             ); // Navega a la pantalla de configuraciones
             break;
@@ -51,7 +53,7 @@ class MenuProductos extends StatelessWidget {
 
                 // Muestra un mensaje de éxito si es necesario
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                  const SnackBar(
                       content:
                           Text('Todos los productos han sido eliminados.')),
                 );

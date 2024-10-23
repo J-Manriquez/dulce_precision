@@ -10,13 +10,13 @@ import 'package:dulce_precision/models/db_model.dart';
 import 'package:dulce_precision/models/theme_model.dart';
 import 'package:dulce_precision/models/font_size_model.dart';
 import 'package:dulce_precision/database/providers/ingredientes_provider.dart';
-import 'package:dulce_precision/widgets/agregar_ingrediente_widget.dart';
-import 'package:dulce_precision/widgets/editar_ingrediente_widget.dart';
+import 'package:dulce_precision/widgets/ingredientes/agregar_ingrediente_widget.dart';
+import 'package:dulce_precision/widgets/ingredientes/editar_ingrediente_widget.dart';
 
 class InsertarRecetasScreen extends StatefulWidget {
   final Receta? receta;
 
-  InsertarRecetasScreen({this.receta});
+  const InsertarRecetasScreen({super.key, this.receta});
 
   @override
   _InsertarRecetasScreenState createState() => _InsertarRecetasScreenState();
@@ -157,7 +157,7 @@ class _InsertarRecetasScreenState extends State<InsertarRecetasScreen> {
       if (mounted) {
         // Verificamos si el widget sigue montado antes de acceder al contexto
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('No se guardaron los cambios')));
+            const SnackBar(content: Text('No se guardaron los cambios')));
       }
     } else {
       Navigator.of(context).pop();
@@ -206,7 +206,7 @@ class _InsertarRecetasScreenState extends State<InsertarRecetasScreen> {
               backgroundColor: themeModel.primaryButtonColor,
               actions: [
                 IconButton(
-                  icon: Icon(Icons.save),
+                  icon: const Icon(Icons.save),
                   onPressed: () => {
                     _guardarReceta(ingredientesProvider),
                     Navigator.of(context).pop()
@@ -244,7 +244,7 @@ class _InsertarRecetasScreenState extends State<InsertarRecetasScreen> {
                       color: themeModel.secondaryTextColor,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   if (estadoReceta == 'insert')
                     AgregarIngredientesWidget(key: _agregarIngredientesKey),
                   if (estadoReceta == 'edit')
@@ -252,7 +252,7 @@ class _InsertarRecetasScreenState extends State<InsertarRecetasScreen> {
                       key: _editarIngredientesKey,
                       idReceta: widget.receta!.idReceta!,
                     ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -350,7 +350,7 @@ class _InsertarRecetasScreenState extends State<InsertarRecetasScreen> {
       if (mounted) {
         // Verificamos si el widget sigue montado antes de acceder al contexto
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Por favor, completa todos los campos.')),
+          const SnackBar(content: Text('Por favor, completa todos los campos.')),
         );
       }
       return;
@@ -398,8 +398,8 @@ class _InsertarRecetasScreenState extends State<InsertarRecetasScreen> {
       if (mounted) {
         // Verificamos si el widget sigue montado antes de acceder al contexto
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Receta guardada')));
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            .showSnackBar(const SnackBar(content: Text('Receta guardada')));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Costos de ingredientes y recetas actualizados')));
       }
     } catch (e) {

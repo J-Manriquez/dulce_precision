@@ -9,6 +9,8 @@ import 'package:dulce_precision/models/theme_model.dart';
 import 'package:dulce_precision/database/providers/productos_provider.dart'; // Import the ProductosProvider
 
 class ProductosScreen extends StatefulWidget {
+  const ProductosScreen({super.key});
+
   @override
   _ProductosScreenState createState() => _ProductosScreenState();
 }
@@ -32,7 +34,7 @@ class _ProductosScreenState extends State<ProductosScreen> {
         await Provider.of<ProductosProvider>(context, listen: false)
             .eliminarProducto(idProducto);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Producto eliminado con éxito')),
+          const SnackBar(content: Text('Producto eliminado con éxito')),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -93,7 +95,7 @@ class _ProductosScreenState extends State<ProductosScreen> {
 
               return Card(
                 elevation: 2,
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
@@ -111,7 +113,7 @@ class _ProductosScreenState extends State<ProductosScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               'Precio: \$${producto.precioProducto.round()}',
                               style: TextStyle(
@@ -158,7 +160,7 @@ class _ProductosScreenState extends State<ProductosScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           ElevatedButton(
                             onPressed: () {
                               _eliminarProducto(context, producto.idProducto!);

@@ -108,7 +108,7 @@ Future<void> calcularCostoCadaRecetas() async {
           CustomLogger()
               .logInfo('Receta costo!: ${recetaActualizada.costoReceta}');
           CustomLogger().logInfo(
-              'Receta actualizada con éxito: ${recetaActualizada.idReceta} ${recetaActualizada}');
+              'Receta actualizada con éxito: ${recetaActualizada.idReceta} $recetaActualizada');
         } catch (e) {
           CustomLogger()
               .logError('Error al actualizar el costo de la receta: $e');

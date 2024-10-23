@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class ThemeModel with ChangeNotifier {
   // Colores predeterminados para el tema personalizado
-  Color _backgroundColor = Color.fromRGBO(30, 30, 30, 1); 
-  Color  _primaryButtonColor = Color.fromRGBO(0, 108, 161, 1); 
-  Color  _secondaryButtonColor = Color.fromRGBO(245, 245, 245, 1);
-  Color  _primaryTextColor = Color.fromRGBO(245, 245, 245, 1);
-  Color  _secondaryTextColor = Color.fromRGBO(30, 30, 30, 1); 
-  Color  _primaryIconColor = Color.fromRGBO(30, 30, 30, 1); 
-  Color  _secondaryIconColor = Color.fromRGBO(245, 245, 245, 1);
+  Color _backgroundColor = const Color.fromRGBO(30, 30, 30, 1); 
+  Color  _primaryButtonColor = const Color.fromRGBO(0, 108, 161, 1); 
+  Color  _secondaryButtonColor = const Color.fromRGBO(245, 245, 245, 1);
+  Color  _primaryTextColor = const Color.fromRGBO(245, 245, 245, 1);
+  Color  _secondaryTextColor = const Color.fromRGBO(30, 30, 30, 1); 
+  Color  _primaryIconColor = const Color.fromRGBO(30, 30, 30, 1); 
+  Color  _secondaryIconColor = const Color.fromRGBO(245, 245, 245, 1);
 
   // Getters para los colores
   Color get backgroundColor => _backgroundColor;
@@ -57,37 +57,37 @@ class ThemeModel with ChangeNotifier {
 
   // Tema claro
   void setLightTheme() {
-    _backgroundColor = Color.fromRGBO(255, 255, 194, 1); // amarillo pastel claro
-    _primaryButtonColor = Color.fromRGBO(226, 107, 105, 1); // Botón café pastel
-    _secondaryButtonColor = Color.fromRGBO(255, 255, 102, 1); // Botón rojo brillante
-    _primaryTextColor = Color.fromRGBO(255, 255, 194, 1); // Texto pastel claro
-    _secondaryTextColor = Color.fromRGBO(30, 30, 30, 1); // Texto oscuro
-    _primaryIconColor = Color.fromRGBO(255, 255, 194, 1); // Icono pastel claro
-    _secondaryIconColor = Color.fromRGBO(30, 30, 30, 1);  // Icono azul brillante
+    _backgroundColor = const Color.fromRGBO(255, 255, 194, 1); // amarillo pastel claro
+    _primaryButtonColor = const Color.fromRGBO(226, 107, 105, 1); // Botón café pastel
+    _secondaryButtonColor = const Color.fromRGBO(255, 255, 102, 1); // Botón rojo brillante
+    _primaryTextColor = const Color.fromRGBO(255, 255, 194, 1); // Texto pastel claro
+    _secondaryTextColor = const Color.fromRGBO(30, 30, 30, 1); // Texto oscuro
+    _primaryIconColor = const Color.fromRGBO(255, 255, 194, 1); // Icono pastel claro
+    _secondaryIconColor = const Color.fromRGBO(30, 30, 30, 1);  // Icono azul brillante
     notifyListeners();
   }
 
   // Tema oscuro
   void setDarkTheme() {
-    _backgroundColor = Color.fromRGBO(30, 30, 30, 1); 
-    _primaryButtonColor = Color.fromRGBO(0, 108, 161, 1); 
-    _secondaryButtonColor = Color.fromRGBO(245, 245, 245, 1);
-    _primaryTextColor = Color.fromRGBO(30, 30, 30, 1); 
-    _secondaryTextColor = Color.fromRGBO(245, 245, 245, 1);
-    _primaryIconColor = Color.fromRGBO(30, 30, 30, 1); 
-    _secondaryIconColor = Color.fromRGBO(245, 245, 245, 1);
+    _backgroundColor = const Color.fromRGBO(30, 30, 30, 1); 
+    _primaryButtonColor = const Color.fromRGBO(0, 108, 161, 1); 
+    _secondaryButtonColor = const Color.fromRGBO(245, 245, 245, 1);
+    _primaryTextColor = const Color.fromRGBO(30, 30, 30, 1); 
+    _secondaryTextColor = const Color.fromRGBO(245, 245, 245, 1);
+    _primaryIconColor = const Color.fromRGBO(30, 30, 30, 1); 
+    _secondaryIconColor = const Color.fromRGBO(245, 245, 245, 1);
     notifyListeners();
   }
 
   // Tema personalizado
   void setCustomTheme() {
-    _backgroundColor = Color.fromRGBO(255, 255, 194, 1); // Fondo pastel claro
-    _primaryButtonColor = Color.fromRGBO(211, 177, 150, 1); // Botón café pastel
-    _secondaryButtonColor = Color.fromRGBO(203, 40, 40, 1); // Botón rojo brillante
-    _primaryTextColor = Color.fromRGBO(255, 255, 194, 1); // Texto pastel claro
-    _secondaryTextColor = Color.fromRGBO(30, 30, 30, 1); // Texto oscuro
-    _primaryIconColor = Color.fromRGBO(255, 255, 194, 1); // Icono pastel claro
-    _secondaryIconColor = Color.fromRGBO(109, 82, 61, 1); // Icono café oscuro
+    _backgroundColor = const Color.fromRGBO(255, 255, 194, 1); // Fondo pastel claro
+    _primaryButtonColor = const Color.fromRGBO(211, 177, 150, 1); // Botón café pastel
+    _secondaryButtonColor = const Color.fromRGBO(203, 40, 40, 1); // Botón rojo brillante
+    _primaryTextColor = const Color.fromRGBO(255, 255, 194, 1); // Texto pastel claro
+    _secondaryTextColor = const Color.fromRGBO(30, 30, 30, 1); // Texto oscuro
+    _primaryIconColor = const Color.fromRGBO(255, 255, 194, 1); // Icono pastel claro
+    _secondaryIconColor = const Color.fromRGBO(109, 82, 61, 1); // Icono café oscuro
     notifyListeners();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Para obtener los modelos dinámicos
-import '../models/theme_model.dart'; // Importa el modelo de tema
-import '../models/font_size_model.dart'; // Importa el modelo de tamaño de fuente
+import '../../models/theme_model.dart'; // Importa el modelo de tema
+import '../../models/font_size_model.dart'; // Importa el modelo de tamaño de fuente
 
 class ColorPickerWidget extends StatefulWidget {
   final String optionName; // Nombre de la opción para usar en el texto
@@ -9,11 +9,11 @@ class ColorPickerWidget extends StatefulWidget {
   final ValueChanged<Color> onColorChanged; // Callback al cambiar de color
 
   const ColorPickerWidget({
-    Key? key,
+    super.key,
     required this.optionName, // Recibe el nombre de la opción como parámetro
     required this.selectedColor, // Recibe el color seleccionado
     required this.onColorChanged, // Recibe la función para cambiar el color
-  }) : super(key: key);
+  });
 
   @override
   _ColorPickerWidgetState createState() => _ColorPickerWidgetState();
@@ -30,44 +30,44 @@ class _ColorPickerWidgetState extends State<ColorPickerWidget> {
 
     // Definimos los colores a mostrar (24 en total)
     final colors = [
-      Color.fromRGBO(245, 245, 245, 1), // Pastel claro
-      Color.fromRGBO(190, 190, 190, 1), // Tono central brillante
-      Color.fromRGBO(30, 30, 30, 1),    // Más oscuro
+      const Color.fromRGBO(245, 245, 245, 1), // Pastel claro
+      const Color.fromRGBO(190, 190, 190, 1), // Tono central brillante
+      const Color.fromRGBO(30, 30, 30, 1),    // Más oscuro
 
       // Tonalidades de rojo
-      Color.fromRGBO(255, 164, 163, 1), // Pastel claro
-      Color.fromRGBO(226, 107, 105, 1),   // Tono central brillante
-      Color.fromRGBO(203, 40, 40, 1),     // Más oscuro
+      const Color.fromRGBO(255, 164, 163, 1), // Pastel claro
+      const Color.fromRGBO(226, 107, 105, 1),   // Tono central brillante
+      const Color.fromRGBO(203, 40, 40, 1),     // Más oscuro
 
       // Tonalidades de amarillo
-      Color.fromRGBO(255, 255, 194, 1), // Pastel claro
-      Color.fromRGBO(255, 255, 102, 1), // Tono central brillante
-      Color.fromRGBO(243, 243, 0, 1),   // Más oscuro
+      const Color.fromRGBO(255, 255, 194, 1), // Pastel claro
+      const Color.fromRGBO(255, 255, 102, 1), // Tono central brillante
+      const Color.fromRGBO(243, 243, 0, 1),   // Más oscuro
 
       // Tonalidades de morado
-      Color.fromRGBO(240, 170, 255, 1), // Pastel claro
-      Color.fromRGBO(165, 100, 230, 1),  // Tono central brillante
-      Color.fromRGBO(100, 30, 120, 1),   // Más oscuro
+      const Color.fromRGBO(240, 170, 255, 1), // Pastel claro
+      const Color.fromRGBO(165, 100, 230, 1),  // Tono central brillante
+      const Color.fromRGBO(100, 30, 120, 1),   // Más oscuro
 
       // Tonalidades de naranja
-      Color.fromRGBO(255, 204, 153, 1), // Pastel claro
-      Color.fromRGBO(255, 140, 0, 1),   // Tono central brillante
-      Color.fromRGBO(225, 142, 2, 1),   // Más oscuro
+      const Color.fromRGBO(255, 204, 153, 1), // Pastel claro
+      const Color.fromRGBO(255, 140, 0, 1),   // Tono central brillante
+      const Color.fromRGBO(225, 142, 2, 1),   // Más oscuro
 
       // Tonalidades de azul
-      Color.fromRGBO(151, 206, 224, 1), // Pastel claro
-      Color.fromRGBO(65, 135, 192, 1),  // Tono central brillante
-      Color.fromRGBO(0, 108, 161, 1),     // Más oscuro
+      const Color.fromRGBO(151, 206, 224, 1), // Pastel claro
+      const Color.fromRGBO(65, 135, 192, 1),  // Tono central brillante
+      const Color.fromRGBO(0, 108, 161, 1),     // Más oscuro
 
       // Tonalidades de café
-      Color.fromRGBO(211, 177, 150, 1), // Pastel claro
-      Color.fromRGBO(150, 105, 30, 1),  // Tono central brillante
-      Color.fromRGBO(109, 82, 61, 1),   // Más oscuro
+      const Color.fromRGBO(211, 177, 150, 1), // Pastel claro
+      const Color.fromRGBO(150, 105, 30, 1),  // Tono central brillante
+      const Color.fromRGBO(109, 82, 61, 1),   // Más oscuro
 
       // Tonalidades de verde
-      Color.fromRGBO(159, 221, 159, 1), // Pastel claro
-      Color.fromRGBO(110, 199, 110, 1),   // Tono central brillante
-      Color.fromRGBO(35, 109, 35, 1),     // Más oscuro
+      const Color.fromRGBO(159, 221, 159, 1), // Pastel claro
+      const Color.fromRGBO(110, 199, 110, 1),   // Tono central brillante
+      const Color.fromRGBO(35, 109, 35, 1),     // Más oscuro
     ];
 
     // Definimos cuántos colores mostrar en la primera fila (6)

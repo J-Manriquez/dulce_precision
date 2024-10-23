@@ -1,6 +1,6 @@
 import 'package:dulce_precision/database/providers/gastosFijos_provider.dart';
 import 'package:dulce_precision/screens/productos/agregar_producto_sc.dart';
-import 'package:dulce_precision/utils/funciones/preciosIngredientes/ejecutar2doPlano.dart';
+import 'package:dulce_precision/utils/funciones/ejecutar2doPlano.dart';
 import 'package:dulce_precision/menus/customNavigationBar.dart';
 import 'package:dulce_precision/menus/menuProductos.dart';
 import 'package:dulce_precision/menus/menuRecetas.dart';
@@ -52,6 +52,8 @@ class MyApp extends StatelessWidget {
   // Instancia del logger
   final CustomLogger customLogger = CustomLogger();
 
+  MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -93,9 +95,9 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _pages.addAll([
-      ProductosScreen(),
+      const ProductosScreen(),
       const HomeScreen(),
-      RecetasScreen(),
+      const RecetasScreen(),
     ]);
   }
 
@@ -110,7 +112,7 @@ class _MainScreenState extends State<MainScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => InsertarRecetasScreen(),
+        builder: (context) => const InsertarRecetasScreen(),
       ),
     ).then((_) {
       // Luego de regresar, actualiza la lista de recetas
@@ -123,7 +125,7 @@ class _MainScreenState extends State<MainScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => InsertarProductosScreen(),
+        builder: (context) => const InsertarProductosScreen(),
       ),
     ).then((_) {
       // Luego de regresar, actualiza la lista de recetas
@@ -139,7 +141,7 @@ class _MainScreenState extends State<MainScreen> {
         context); // Obtenemos el modelo de tamaño de fuente
 
     // Actualizamos _floatingMenus para usar el método de navegación
-    final List<Widget> _floatingMenus = [
+    final List<Widget> floatingMenus = [
       Row(
         children: [
           IconButton(
@@ -151,7 +153,7 @@ class _MainScreenState extends State<MainScreen> {
               _navegarAInsertarProductos(context);
             },
           ),
-          MenuProductos(), // Menú flotante para Productos
+          const MenuProductos(), // Menú flotante para Productos
         ],
       ),
       Row(
@@ -163,7 +165,7 @@ class _MainScreenState extends State<MainScreen> {
             onPressed: () {
             },
           ),
-          MenuVentas(), // Menú flotante para Ventas
+          const MenuVentas(), // Menú flotante para Ventas
         ],
       ),
       Row(
@@ -176,7 +178,7 @@ class _MainScreenState extends State<MainScreen> {
               _navegarAInsertarReceta(context); // Llama al método de navegación
             },
           ),
-          MenuRecetas(), // Menú flotante para Recetas
+          const MenuRecetas(), // Menú flotante para Recetas
         ],
       ),
     ];
@@ -207,7 +209,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         actions: <Widget>[
-          _floatingMenus[
+          floatingMenus[
               _selectedIndex], // Cambia el menú flotante e ícono según la pantalla seleccionada
         ],
       ),

@@ -13,7 +13,7 @@ class CustomTextField extends StatefulWidget {
   final Function(String)? onChanged;
   final TextStyle? style;
 
-  CustomTextField({
+  const CustomTextField({super.key, 
     this.readOnly = false,
     this.controller,
     this.decoration,
@@ -46,7 +46,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: TextField(
         readOnly: widget.readOnly,
         controller: widget.controller,
-        decoration: (widget.decoration ?? InputDecoration()).copyWith(
+        decoration: (widget.decoration ?? const InputDecoration()).copyWith(
               labelText: widget.labelText,
               suffixIcon: widget.suffixIcon,
               labelStyle: TextStyle(
@@ -73,7 +73,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   width: 2.0,
                 ),
               ),
-              disabledBorder: OutlineInputBorder(
+              disabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.purple, // Borde cuando está deshabilitado
                   width: 2.0,

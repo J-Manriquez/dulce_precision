@@ -7,6 +7,8 @@ import 'package:dulce_precision/screens/recetas/recetas_screen.dart';
 import 'package:provider/provider.dart'; // Importa la pantalla de recetas
 
 class MenuVentas extends StatelessWidget {
+  const MenuVentas({super.key});
+
   @override
   Widget build(BuildContext context) {
         final themeModel = Provider.of<ThemeModel>(context); // Obtenemos el modelo de tema
@@ -23,7 +25,7 @@ class MenuVentas extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SettingsScreen(),
+                builder: (context) => const SettingsScreen(),
               ),
             ); // Navega a la pantalla de configuraciones
             break;
@@ -31,7 +33,7 @@ class MenuVentas extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => RecetasScreen(),
+                builder: (context) => const RecetasScreen(),
               ),
             ); // Navega a la pantalla de recetas
             break;

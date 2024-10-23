@@ -5,7 +5,7 @@ class UserDataScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'Datos del usuario',
         style: TextStyle(fontSize: 24),

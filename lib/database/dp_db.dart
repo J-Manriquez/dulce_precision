@@ -100,7 +100,9 @@ class DatabaseHelper {
                     precioGFVenta REAL NOT NULL, -- % de GF aplicado a la sumatoria de precios de los gastos fijos aplicado al precio final del producto
                     costoRecetaVenta REAL NOT NULL, -- costo de hacer la receta (ingredientes)
                     pctjGananciaVenta REAL NOT NULL, -- Porcentaje de ganancia deseado con la venta
-                    precioPorProductoVenta REAL NOT NULL -- Precio final por producto
+                    montoGananciaVenta REAL NOT NULL, -- Monto de ganancia deseado con la venta
+                    precioPorProductoVenta REAL NOT NULL, -- Precio final por producto
+                    precioFinalVenta REAL NOT NULL -- Precio final de la venta de la receta
                   );
                 ''');
             CustomLogger().logInfo('Tabla ventas creada correctamente');

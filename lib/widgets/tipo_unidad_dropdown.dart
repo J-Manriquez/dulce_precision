@@ -7,7 +7,7 @@ class TipoUnidadDropdown extends StatefulWidget {
   final String? initialValue; // Valor inicial seleccionado (opcional)
   final ValueChanged<String> onChanged; // Callback para cuando el valor cambia
 
-  TipoUnidadDropdown({this.initialValue, required this.onChanged});
+  const TipoUnidadDropdown({super.key, this.initialValue, required this.onChanged});
 
   @override
   _TipoUnidadDropdownState createState() => _TipoUnidadDropdownState();

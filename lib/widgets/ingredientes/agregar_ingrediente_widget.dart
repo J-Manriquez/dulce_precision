@@ -1,12 +1,12 @@
 import 'package:dulce_precision/utils/custom_logger.dart';
 import 'package:flutter/material.dart';
-import 'tipo_unidad_dropdown.dart';
+import '../tipo_unidad_dropdown.dart';
 import 'package:dulce_precision/models/theme_model.dart'; // Importamos el modelo de tema
 import 'package:dulce_precision/models/font_size_model.dart'; // Importamos el modelo de tamaños de fuente
 import 'package:provider/provider.dart'; // Importa Provider
 
 class AgregarIngredientesWidget extends StatefulWidget {
-  AgregarIngredientesWidget({Key? key}) : super(key: key);
+  const AgregarIngredientesWidget({super.key});
 
   @override
   AgregarIngredientesWidgetState createState() => AgregarIngredientesWidgetState();
@@ -66,9 +66,8 @@ class AgregarIngredientesWidgetState extends State<AgregarIngredientesWidget> {
       children: [
         ElevatedButton(
           onPressed: _agregarIngrediente,
-          child: Text('Añadir Ingrediente'),
           style: ElevatedButton.styleFrom(
-            minimumSize: Size(double.infinity, 40),
+            minimumSize: const Size(double.infinity, 40),
             backgroundColor: themeModel.secondaryButtonColor.withOpacity(0.5),
             foregroundColor: themeModel.primaryTextColor,
             textStyle: TextStyle(
@@ -76,10 +75,11 @@ class AgregarIngredientesWidgetState extends State<AgregarIngredientesWidget> {
               color: themeModel.primaryTextColor,
             ),
           ),
+          child: Text('Añadir Ingrediente'),
         ),
         ListView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: _ingredientes.length,
           itemBuilder: (context, index) {
             return Padding(
@@ -115,14 +115,14 @@ class AgregarIngredientesWidgetState extends State<AgregarIngredientesWidget> {
                           onChanged: (value) => _actualizarIngrediente(index, 'nombre', value),
                         ),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       IconButton(
                         icon: Icon(Icons.remove_circle, color: themeModel.secondaryButtonColor.withOpacity(0.6)),
                         onPressed: () => _eliminarIngrediente(index),
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
                       Expanded(
@@ -152,7 +152,7 @@ class AgregarIngredientesWidgetState extends State<AgregarIngredientesWidget> {
                           onChanged: (value) => _actualizarIngrediente(index, 'cantidad', value),
                         ),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       TipoUnidadDropdown(
                         initialValue: _ingredientes[index]['tipoUnidad'],
                         onChanged: (value) => _actualizarIngrediente(index, 'tipoUnidad', value),

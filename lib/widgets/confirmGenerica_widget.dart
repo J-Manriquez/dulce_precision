@@ -37,7 +37,7 @@ class ConfirmDialog {
                         color: themeModel.primaryTextColor, // Color del texto
                       ),
                     ),
-                    SizedBox(height: 10), // Espaciado entre el título y el mensaje
+                    const SizedBox(height: 10), // Espaciado entre el título y el mensaje
                     // Mensaje de confirmación pasado como parámetro
                     Center(
                       child: Text(
@@ -49,7 +49,7 @@ class ConfirmDialog {
                         textAlign: TextAlign.center, // Centrar el texto
                       ),
                     ),
-                    SizedBox(height: 20), // Espaciado entre el mensaje y los botones
+                    const SizedBox(height: 20), // Espaciado entre el mensaje y los botones
                     // Fila de botones para cancelar o confirmar
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Espaciado uniforme
@@ -72,7 +72,7 @@ class ConfirmDialog {
                             onPressed: () => Navigator.of(context).pop(false),
                           ),
                         ),
-                        SizedBox(width: 10), // Separación entre los botones
+                        const SizedBox(width: 10), // Separación entre los botones
                         // Botón de "Confirmar"
                         Expanded(
                           child: TextButton(

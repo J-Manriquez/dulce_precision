@@ -10,6 +10,8 @@ import 'package:dulce_precision/utils/custom_logger.dart';
 import 'package:provider/provider.dart';
 
 class RecetarioOnlineScreen extends StatefulWidget {
+  const RecetarioOnlineScreen({super.key});
+
   @override
   _RecetarioOnlineScreenState createState() => _RecetarioOnlineScreenState();
 }
@@ -242,7 +244,7 @@ Montar y listo. ''',
               itemCount: recetas.length,
               itemBuilder: (context, index) {
                 return Card(
-                  margin: EdgeInsets.all(8.0),
+                  margin: const EdgeInsets.all(8.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -270,7 +272,7 @@ Montar y listo. ''',
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.add),
+                              icon: const Icon(Icons.add),
                               onPressed: () => _addRecipe(index),
                             ),
                           ],
@@ -278,7 +280,7 @@ Montar y listo. ''',
                       ),
                       if (_isExpanded[index])
                         Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment
                                 .start, // Alinear a la izquierda
@@ -300,8 +302,8 @@ Montar y listo. ''',
                                     color: themeModel.secondaryTextColor,
                                   ),
                                 );
-                              }).toList(),
-                              SizedBox(height: 16.0),
+                              }),
+                              const SizedBox(height: 16.0),
                               Text(
                                 'Descripción:',
                                 style: TextStyle(

@@ -1,7 +1,7 @@
 import 'package:dulce_precision/models/font_size_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/theme_model.dart';
+import '../../models/theme_model.dart';
 
 class FontSizeSelector extends StatelessWidget {
   final String label;
@@ -11,13 +11,13 @@ class FontSizeSelector extends StatelessWidget {
   final ValueChanged<double> onSizeChanged;
 
   const FontSizeSelector({
-    Key? key,
+    super.key,
     required this.label,
     required this.currentSize,
     required this.min,
     required this.max,
     required this.onSizeChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -11,10 +11,10 @@ class PrincipalMenu extends StatelessWidget {
   final int selectedIndex; // Índice seleccionado
 
   const PrincipalMenu({
-    Key? key,
+    super.key,
     required this.pageTitles, // Requiere la lista de títulos de las páginas
     required this.selectedIndex, // Requiere el índice seleccionado
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class PrincipalMenu extends StatelessWidget {
                     Navigator.of(context).pop(); // Cierra el Drawer
                   },
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   pageTitles[selectedIndex], // Muestra el título de la página seleccionada
                   style: TextStyle(
@@ -66,7 +66,7 @@ class PrincipalMenu extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => GastosFijosScreen()),
+                MaterialPageRoute(builder: (context) => const GastosFijosScreen()),
               );
             },
           ),

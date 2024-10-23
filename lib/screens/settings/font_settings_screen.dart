@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/font_size_model.dart';
 import '../../models/theme_model.dart'; // Para manejar los colores dinámicos
-import '../../widgets/font_size_selector.dart';
+import '../../widgets/settings/font_size_selector.dart';
 
 class FontSettingsScreen extends StatelessWidget {
   const FontSettingsScreen({super.key});
@@ -55,7 +55,7 @@ class FontSettingsScreen extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: themeModel.primaryButtonColor, // Color del botón
-                  minimumSize: Size(double.infinity, 48), // Ancho completo del botón
+                  minimumSize: const Size(double.infinity, 48), // Ancho completo del botón
                 ),
                 child: Text(
                   'Restablecer tamaños predeterminados',

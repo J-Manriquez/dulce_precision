@@ -9,6 +9,19 @@ class IngredientesRecetasProvider with ChangeNotifier {
 
   List<IngredienteReceta> get ingredientes => _ingredientes; // Getter para la lista de ingredientes
 
+  // Método para obtener ingredientes desde la base de datos
+  Future<void> obtenerIngredientesPorReceta(int idReceta) async {
+    try {
+      _ingredientes = await _ingredienteRepository.getAllIngredientesPorReceta(idReceta); // Obtiene ingredientes del repositorio
+      notifyListeners(); // Notifica a los widgets que los datos han cambiado
+    } catch (e) {
+      // Registro de errores usando CustomLogger
+      CustomLogger().logError('Error al obtener ingredientes: $e');
+      // Aquí puedes manejar los errores, como mostrar un mensaje al usuario.
+      throw Exception("Error al obtener ingredientes"); // Lanzamos una excepción para manejo externo
+    }
+  }
+  
 // Método para obtener recetas desde la base de datos
   Future<void> obtenerIngredientes() async {
     try {
@@ -25,18 +38,6 @@ class IngredientesRecetasProvider with ChangeNotifier {
   }
 
 
-  // Método para obtener ingredientes desde la base de datos
-  Future<void> obtenerIngredientesPorReceta(int idReceta) async {
-    try {
-      _ingredientes = await _ingredienteRepository.getAllIngredientesPorReceta(idReceta); // Obtiene ingredientes del repositorio
-      notifyListeners(); // Notifica a los widgets que los datos han cambiado
-    } catch (e) {
-      // Registro de errores usando CustomLogger
-      CustomLogger().logError('Error al obtener ingredientes: $e');
-      // Aquí puedes manejar los errores, como mostrar un mensaje al usuario.
-      throw Exception("Error al obtener ingredientes"); // Lanzamos una excepción para manejo externo
-    }
-  }
 
   // Método para agregar un ingrediente
   Future<void> agregarIngrediente(IngredienteReceta ingrediente) async {

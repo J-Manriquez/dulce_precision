@@ -10,7 +10,7 @@ import 'package:dulce_precision/widgets/confirmGenerica_widget.dart';
 class InsertarGastosFijosScreen extends StatefulWidget {
   final GastoFijo? gastoFijo;
 
-  InsertarGastosFijosScreen({this.gastoFijo});
+  const InsertarGastosFijosScreen({super.key, this.gastoFijo});
 
   @override
   _InsertarGastosFijosScreenState createState() =>
@@ -46,7 +46,7 @@ class _InsertarGastosFijosScreenState extends State<InsertarGastosFijosScreen> {
 
     if (_nombreController.text.isEmpty || _montoController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Por favor, completa todos los campos.')),
+        const SnackBar(content: Text('Por favor, completa todos los campos.')),
       );
       return;
     }
@@ -54,7 +54,7 @@ class _InsertarGastosFijosScreenState extends State<InsertarGastosFijosScreen> {
     final double? montoGastoFijo = double.tryParse(_montoController.text);
     if (montoGastoFijo == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Por favor, ingresa un valor numérico válido.')),
+        const SnackBar(content: Text('Por favor, ingresa un valor numérico válido.')),
       );
       return;
     }
@@ -70,13 +70,13 @@ class _InsertarGastosFijosScreenState extends State<InsertarGastosFijosScreen> {
         // Si es un nuevo gasto fijo, lo agrega
         await gastosFijosProvider.agregarGastoFijo(gastoFijo);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Gasto fijo insertado con éxito!')),
+          const SnackBar(content: Text('Gasto fijo insertado con éxito!')),
         );
       } else {
         // Si es un gasto fijo existente, lo actualiza
         await gastosFijosProvider.actualizarGastoFijo(gastoFijo); // Asegúrate de tener este método
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Gasto fijo actualizado con éxito!')),
+          const SnackBar(content: Text('Gasto fijo actualizado con éxito!')),
         );
       }
 
@@ -129,7 +129,7 @@ class _InsertarGastosFijosScreenState extends State<InsertarGastosFijosScreen> {
           backgroundColor: themeModel.primaryButtonColor,
           actions: [
             IconButton(
-              icon: Icon(Icons.save),
+              icon: const Icon(Icons.save),
               onPressed: _guardarGastoFijo,
               color: themeModel.primaryTextColor,
             ),
@@ -141,14 +141,14 @@ class _InsertarGastosFijosScreenState extends State<InsertarGastosFijosScreen> {
             children: [
               TextField(
                 controller: _nombreController,
-                decoration: InputDecoration(labelText: 'Nombre del Gasto Fijo'),
+                decoration: const InputDecoration(labelText: 'Nombre del Gasto Fijo'),
               ),
               TextField(
                 controller: _montoController,
-                decoration: InputDecoration(labelText: 'Monto del Gasto Fijo'),
+                decoration: const InputDecoration(labelText: 'Monto del Gasto Fijo'),
                 keyboardType: TextInputType.number,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),

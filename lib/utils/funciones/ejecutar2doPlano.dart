@@ -1,6 +1,7 @@
 // background_tasks.dart
 
 import 'package:dulce_precision/database/dp_db.dart'; // Importa las dependencias necesarias
+import 'package:dulce_precision/database/metodos/metodos_db_dp.dart';
 import 'package:dulce_precision/utils/custom_logger.dart';
 import 'package:dulce_precision/utils/funciones/preciosIngredientes/ingredientesCalcularCostos.dart';
 import 'package:dulce_precision/utils/funciones/preciosRecetas/recetasCalcularCostos.dart';
@@ -21,4 +22,9 @@ Future<void> runBackgroundTasks() async {
   // Actualiza los costos de los ingredientes y las recetas
   await actualizarCostosAllIngredientes();
   await calcularCostoCadaRecetas();
+
+  MetodosRepository metodosRepository = MetodosRepository();
+   // Función para borrar la base de datos
+  // await metodosRepository.eliminarDatabase();
+  await metodosRepository.getTableContent('ventas');
 }

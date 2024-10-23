@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
+import 'package:dulce_precision/database/providers/ventas_provider.dart';
 import 'package:dulce_precision/models/font_size_model.dart';
 import 'package:dulce_precision/models/theme_model.dart';
-import 'package:dulce_precision/widgets/cards_obtenerGF.dart';
-import 'package:dulce_precision/widgets/cards_obtenerRecetas.dart';
+import 'package:dulce_precision/widgets/ventas/cards_obtenerGF.dart';
+import 'package:dulce_precision/widgets/ventas/cards_obtenerRecetas.dart';
 import 'package:dulce_precision/models/db_model.dart';
 import 'package:dulce_precision/widgets/customTextField_ventas.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +12,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class AgregarVentaSC extends StatefulWidget {
+  const AgregarVentaSC({super.key});
+
   @override
   _AgregarVentaSCState createState() => _AgregarVentaSCState();
 }
@@ -84,14 +89,15 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
         ),
         backgroundColor: themeModel.primaryButtonColor,
         actions: [
-          // IconButton(
-          //   icon: Icon(Icons.save),
-          //   onPressed: () => {
-          //     _guardarReceta(ingredientesProvider),
-          //     Navigator.of(context).pop()
-          //   },
-          //   color: themeModel.primaryTextColor,
-          // ),
+          if (_recetaSeleccionada != null)
+            IconButton(
+              icon: const Icon(Icons.save),
+              onPressed: () async {
+                await _guardarDatosVenta();
+                Navigator.of(context).pop();
+              },
+              color: themeModel.primaryTextColor,
+            ),
         ],
       ),
       body: _mostrarObtenerRecetas
@@ -117,7 +123,7 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
               MediaQuery.of(context).padding.top,
         ),
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -125,36 +131,36 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                 controller: _nombreVentaController, // Controlador agregado
                 labelText:
                     'Ingresa nombre o motivo de la venta', // Texto de la etiqueta
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(), // Borde del TextField
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               CustomTextField(
                 readOnly: true, // Campo de solo lectura
                 controller: TextEditingController(
                     text: formattedTime), // Controlador con el valor de la hora
                 labelText: 'Hora', // Texto de la etiqueta
-                suffixIcon: Icon(
+                suffixIcon: const Icon(
                     Icons.access_time), // Icono al final del campo de texto
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(), // Borde del TextField
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               CustomTextField(
                 readOnly: true, // El campo es de solo lectura
                 controller: TextEditingController(
                     text:
                         formattedDate), // Controlador con el valor de la fecha
                 labelText: 'Fecha', // Etiqueta del campo
-                suffixIcon: Icon(Icons
+                suffixIcon: const Icon(Icons
                     .calendar_today), // Ícono de calendario al final del campo
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(), // Borde del TextField
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               CustomTextField(
                 readOnly: true, // El campo es de solo lectura
                 controller: TextEditingController(
@@ -162,27 +168,11 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                       'Sin nombre', // Valor del controlador, con un valor por defecto
                 ),
                 labelText: 'Receta seleccionada', // Etiqueta del campo
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(), // Borde del TextField
                 ),
               ),
-              SizedBox(height: 16),
-              // CustomTextField(
-              //   controller: _ventasPorRecetaController, // Controlador agregado
-              //   keyboardType: TextInputType
-              //       .number, // Tipo de teclado para entrada numérica
-              //   labelText: 'Ventas por receta', // Etiqueta del campo
-              //   decoration: InputDecoration(
-              //     border: OutlineInputBorder(
-              //     ),
-              //   ),
-              // ),
-              // Text(
-              //   'Es la cantidad de productos a vender que se obtienen de la receta, por ejemplo, un pie de limon se puede dividir en 8 partes para vender por separado',
-              //   style: TextStyle(
-              //       color: themeModel.secondaryTextColor,
-              //       fontSize: fontSizeModel.textSize * 0.8),
-              // ),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
@@ -191,7 +181,7 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                       controller: _ventasPorRecetaController,
                       keyboardType: TextInputType.number,
                       labelText: 'Ventas por receta',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -241,7 +231,7 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                         ),
                       ),
                     )),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CustomTextField(
                 readOnly: true, // Campo de solo lectura
                 controller: TextEditingController(
@@ -253,18 +243,18 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                       : 'Costo no calculado', // Mensaje si no hay costo
                 ),
                 labelText: 'Costo de la receta', // Etiqueta del campo
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(), // Borde del TextField
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
                     child: CustomTextField(
                       controller:
                           _porcentajeGananciaController, // Controlador agregado
-                      keyboardType: TextInputType.numberWithOptions(
+                      keyboardType: const TextInputType.numberWithOptions(
                           decimal: true), // Teclado numérico con opción decimal
                       onChanged: (value) {
                         setState(() {
@@ -273,27 +263,27 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                         });
                       },
                       labelText: 'Porcentaje (%)', // Etiqueta del campo
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(), // Borde del TextField
                       ),
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: _calcularPorcentajeGanancia,
-                    child: Text(
-                      'Calcular',
-                      style: TextStyle(fontSize: fontSizeModel.textSize),
-                    ),
                     style: ButtonStyle(
                         backgroundColor: WidgetStateProperty.all(
                             themeModel.primaryButtonColor),
                         foregroundColor: WidgetStateProperty.all(
                             themeModel.primaryTextColor)),
+                    child: Text(
+                      'Calcular',
+                      style: TextStyle(fontSize: fontSizeModel.textSize),
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
@@ -305,7 +295,7 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                             : 'Esperando % de ganancia', // Mensaje si no se ha ingresado un porcentaje
                       ),
                       labelText: 'Porcentaje de ganancia', // Etiqueta del campo
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(), // Borde del TextField
                       ),
                     ),
@@ -345,7 +335,7 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                         ),
                       ),
                     )),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -377,7 +367,7 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                 ],
               ),
               if (_agregarGastosFijos) ...[
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 if (!_gastosConfirmados)
                   Container(
                     child: SingleChildScrollView(
@@ -387,11 +377,11 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                     ),
                   ),
                 if (_gastosConfirmados) ...[
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   _buildResultadoGastos(),
                 ],
               ],
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Resultados obtenidos',
                 style: TextStyle(
@@ -399,29 +389,29 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
                     fontWeight: FontWeight.bold,
                     color: themeModel.primaryButtonColor),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               CustomTextField(
                 readOnly: true,
                 controller: TextEditingController(
                   text: _calcularPrecioVentaReceta(),
                 ),
                 labelText: 'Precio venta por receta',
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               CustomTextField(
                 readOnly: true,
                 controller: TextEditingController(
                   text: _calcularPrecioPorProducto(),
                 ),
                 labelText: 'Precio por unidad',
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Resumen de la venta',
                 style: TextStyle(
@@ -460,10 +450,56 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
     return '\$${precioVentaReceta.round()}';
   }
 
+  Future<void> _guardarDatosVenta() async {
+    // Asegurarse de que los controladores y variables relevantes están llenos
+    final nombreVenta = _nombreVentaController.text.isNotEmpty
+        ? _nombreVentaController.text
+        : 'Sin definir';
+    final hora = DateFormat('HH:mm:ss').format(now);
+    final fecha = DateFormat('dd/MM/yyyy').format(now);
+    final receta = _recetaSeleccionada?.nombreReceta ?? 'Sin receta';
+    final ventasPorReceta = _ventasPorRecetaController.text.isNotEmpty
+        ? double.parse(_ventasPorRecetaController.text)
+        : 1.0;
+    final costoReceta = double.parse(_recetaSeleccionada!.costoReceta!);
+    final porcentajeGanancia = _porcentajeGanancia;
+    final montoGanancia = _montoGanancia;
+    final porcentajeGastosFijos = _agregarGastosFijos ? _porcentaje : 0.0;
+    final desgloseGF = _gastosConfirmados
+        ? _gastosCalculados
+            .map((gasto) =>
+                '\n   • ${gasto.gasto.nombreGF}: \$${gasto.valorCalculado.round()}')
+            .join(', ')
+        : 'Sin detalle';
+    final montoGastosFijos = _agregarGastosFijos ? _totalCalculado : 0.0;
+    final precioVentaReceta = _precioVentaReceta;
+    final precioPorProducto = _precioPorProducto;
+
+    // Crear un mapa con los datos
+    var venta = Venta(
+      nombreVenta: nombreVenta,
+      horaVenta: hora,
+      fechaVenta: fecha,
+      productoVenta: receta,
+      cantidadVenta: ventasPorReceta,
+      pctjGFVenta: porcentajeGastosFijos,
+      desgloseGFVenta: desgloseGF,
+      precioGFVenta: montoGastosFijos,
+      costoRecetaVenta: costoReceta,
+      pctjGananciaVenta: porcentajeGanancia,
+      montoGananciaVenta: montoGanancia,
+      precioPorProductoVenta: precioPorProducto,
+      precioFinalVenta: precioVentaReceta,
+    );
+    await Provider.of<VentasProvider>(context, listen: false)
+        .agregarVenta(venta);
+  }
+
   Widget _buildResumenVenta() {
     final themeModel = Provider.of<ThemeModel>(context);
     final fontSizeModel = Provider.of<FontSizeModel>(context);
-    final String resumen = '''Nombre o Motivo: ${(_nombreVentaController.text == '' ? 'Sin definir' : _nombreVentaController.text)}
+    final String resumen =
+        '''Nombre o Motivo: ${(_nombreVentaController.text == '' ? 'Sin definir' : _nombreVentaController.text)}
 • Hora: ${DateFormat('HH:mm:ss').format(now)}
 • Fecha: ${DateFormat('dd/MM/yyyy').format(now)}
 Receta: ${_recetaSeleccionada?.nombreReceta ?? 'N/A'}
@@ -499,8 +535,9 @@ Precio de venta por unidad: \$${_precioPorProducto.round()}''';
   }
 
   void _calcularPorcentajeGanancia() {
-    final String? costo_receta = _recetaSeleccionada?.costoReceta;
-    final double costoReceta = double.tryParse(costo_receta ?? '0.0') ?? 0.0;
+    final String? costoRecetaString = _recetaSeleccionada?.costoReceta;
+    final double costoReceta =
+        double.tryParse(costoRecetaString ?? '0.0') ?? 0.0;
     setState(() {
       _montoGanancia = costoReceta * _porcentajeGanancia / 100;
     });
@@ -513,7 +550,7 @@ Precio de venta por unidad: \$${_precioPorProducto.round()}''';
       children: [
         CustomTextField(
           readOnly: true, // El campo de texto es de solo lectura
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Porcentaje ingresado', // Etiqueta del campo de texto
             border: OutlineInputBorder(), // Borde del campo de texto
           ),
@@ -521,10 +558,10 @@ Precio de venta por unidad: \$${_precioPorProducto.round()}''';
             text: '$_porcentaje%', // Muestra el porcentaje ingresado
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         CustomTextField(
           readOnly: true, // El campo de texto es de solo lectura
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText:
                 'Detalle de gastos seleccionados', // Etiqueta del campo de texto
             border: OutlineInputBorder(), // Borde del campo de texto
@@ -537,10 +574,10 @@ Precio de venta por unidad: \$${_precioPorProducto.round()}''';
                     '\n'), // Une los gastos en una cadena de texto separada por saltos de línea
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         CustomTextField(
           readOnly: true, // El campo de texto es de solo lectura
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Total calculado', // Etiqueta del campo de texto
             border: OutlineInputBorder(), // Borde del campo de texto
           ),

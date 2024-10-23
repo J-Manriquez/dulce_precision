@@ -69,10 +69,10 @@ Future<void> mostrarDetallesModal(BuildContext context, int? idReceta) {
         future: recetaRepositorio.obtenerRecetaPorId(idReceta!),
         builder: (context, recetaSnapshot) {
           if (recetaSnapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (!recetaSnapshot.hasData || recetaSnapshot.data == null) {
-            return Center(child: Text('No se pudo cargar la receta.'));
+            return const Center(child: Text('No se pudo cargar la receta.'));
           }
           final receta = recetaSnapshot.data!;
 
@@ -82,11 +82,11 @@ Future<void> mostrarDetallesModal(BuildContext context, int? idReceta) {
             builder: (context, ingredientesSnapshot) {
               if (ingredientesSnapshot.connectionState ==
                   ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               if (!ingredientesSnapshot.hasData ||
                   ingredientesSnapshot.data!.isEmpty) {
-                return Center(child: Text('No hay ingredientes disponibles.'));
+                return const Center(child: Text('No hay ingredientes disponibles.'));
               }
               final ingredientes = ingredientesSnapshot.data!;
               return Dialog(
@@ -155,7 +155,7 @@ Future<void> mostrarDetallesModal(BuildContext context, int? idReceta) {
                                             child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                 minimumSize:
-                                                    Size(double.infinity, 30),
+                                                    const Size(double.infinity, 30),
                                                 backgroundColor:
                                                     themeModel.primaryTextColor,
                                                 foregroundColor: themeModel
@@ -165,7 +165,7 @@ Future<void> mostrarDetallesModal(BuildContext context, int? idReceta) {
                                                 await actualizarConAnimacion(
                                                     context, idReceta);
                                               },
-                                              child: Icon(Icons.refresh),
+                                              child: const Icon(Icons.refresh),
                                             ),
                                           ),
                                         ],
@@ -249,13 +249,13 @@ Future<void> mostrarDetallesModal(BuildContext context, int? idReceta) {
                                         thickness: 1,
                                         height: 10,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                           height:
                                               8), // Espacio entre ingredientes
                                     ],
                                   ),
                                 );
-                              }).toList(),
+                              }),
                             ],
                           ),
                         ),
@@ -266,7 +266,7 @@ Future<void> mostrarDetallesModal(BuildContext context, int? idReceta) {
                             vertical: 16), // Padding para el botón "Cerrar"
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 40),
+                            minimumSize: const Size(double.infinity, 40),
                             backgroundColor: themeModel.primaryButtonColor,
                             foregroundColor: themeModel.primaryTextColor,
                           ),

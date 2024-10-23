@@ -12,7 +12,7 @@ import 'package:dulce_precision/widgets/tipo_unidad_dropdown.dart';
 class InsertarProductosScreen extends StatefulWidget {
   final Producto? producto;
 
-  InsertarProductosScreen({this.producto});
+  const InsertarProductosScreen({super.key, this.producto});
 
   @override
   _InsertProductScreenState createState() => _InsertProductScreenState();
@@ -81,7 +81,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
         _cantidadController.text.isEmpty ||
         _cantidadUnidadController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Por favor, completa todos los campos.')),
+        const SnackBar(content: Text('Por favor, completa todos los campos.')),
       );
       return;
     }
@@ -95,7 +95,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
         cantidadProducto == null ||
         cantidadUnidadesProducto == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
             content: Text('Por favor, ingresa valores numéricos válidos.')),
       );
       return;
@@ -115,13 +115,13 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
         int id = await productRepo.insertProducto(producto);
         print("Producto insertado con ID: $id");
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Producto insertado con éxito!')),
+          const SnackBar(content: Text('Producto insertado con éxito!')),
         );
       } else {
         await productRepo.actualizarProducto(producto);
         print("Producto actualizado con ID: ${producto.idProducto}");
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Producto actualizado con éxito!')),
+          const SnackBar(content: Text('Producto actualizado con éxito!')),
         );
       }
 
@@ -136,7 +136,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
       await calcularCostoCadaRecetas();
 
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Costos actualizados')));
+          .showSnackBar(const SnackBar(content: Text('Costos actualizados')));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al guardar el producto: $e')),
@@ -156,7 +156,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
       if (mounted) {
         // Verificamos si el widget sigue montado antes de acceder al contexto
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('No se guardaron los cambios')));
+            const SnackBar(content: Text('No se guardaron los cambios')));
       }
     } else {
       Navigator.of(context).pop();
@@ -189,7 +189,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
         child: Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () async {
                 _confirmarSalida();
               },
@@ -204,7 +204,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
             backgroundColor: themeModel.primaryButtonColor,
             actions: [
               IconButton(
-                icon: Icon(Icons.save),
+                icon: const Icon(Icons.save),
                 onPressed: () =>
                     {_guardarProducto(), Navigator.of(context).pop()},
                 color: themeModel.primaryTextColor,
@@ -263,7 +263,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         flex: 1,
                         child: TipoUnidadDropdown(
@@ -291,7 +291,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
                       color: themeModel.secondaryTextColor,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

@@ -9,6 +9,8 @@ import 'package:dulce_precision/models/font_size_model.dart';
 import 'package:dulce_precision/models/theme_model.dart';
 
 class GastosFijosScreen extends StatefulWidget {
+  const GastosFijosScreen({super.key});
+
   @override
   _GastosFijosScreenState createState() => _GastosFijosScreenState();
 }
@@ -32,7 +34,7 @@ class _GastosFijosScreenState extends State<GastosFijosScreen> {
         await Provider.of<GastosFijosProvider>(context, listen: false)
             .eliminarGastoFijo(idGastoFijo);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Gasto fijo eliminado con éxito')),
+          const SnackBar(content: Text('Gasto fijo eliminado con éxito')),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -70,7 +72,7 @@ class _GastosFijosScreenState extends State<GastosFijosScreen> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => InsertarGastosFijosScreen(),
+                  builder: (context) => const InsertarGastosFijosScreen(),
                 ),
               ).then((_) => gastosFijosProvider.obtenerGastosFijos());
             },
@@ -100,7 +102,7 @@ class _GastosFijosScreenState extends State<GastosFijosScreen> {
 
               return Card(
                 elevation: 2,
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
@@ -118,7 +120,7 @@ class _GastosFijosScreenState extends State<GastosFijosScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               'Monto: \$${gastoFijo.valorGF.round()}',
                               style: TextStyle(
@@ -151,7 +153,7 @@ class _GastosFijosScreenState extends State<GastosFijosScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           ElevatedButton(
                             onPressed: () {
                               _eliminarGastoFijo(context, gastoFijo.idGF!);

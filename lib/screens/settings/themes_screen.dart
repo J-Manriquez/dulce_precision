@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/theme_model.dart';
 import '../../models/font_size_model.dart';
-import '../../widgets/color_picker_widget.dart'; // Importa el widget de selección de color
+import '../../widgets/settings/color_picker_widget.dart'; // Importa el widget de selección de color
 
 class ThemesScreen extends StatelessWidget {
   const ThemesScreen({super.key});

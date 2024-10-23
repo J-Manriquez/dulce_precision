@@ -179,14 +179,16 @@ class Venta {
   final String nombreVenta;
   final String horaVenta;
   final String fechaVenta;
-  final int productoVenta; // Relacionado con la tabla Productos
+  final String productoVenta; // Relacionado con la tabla Productos
   final double cantidadVenta;
   final double pctjGFVenta;
   final String desgloseGFVenta;
   final double precioGFVenta;
-  final double precioRecetaVenta;
+  final double costoRecetaVenta;
   final double pctjGananciaVenta;
+  final double montoGananciaVenta;
   final double precioPorProductoVenta;
+  final double precioFinalVenta;
 
   // Constructor
   Venta({
@@ -199,15 +201,17 @@ class Venta {
     required this.pctjGFVenta,
     required this.desgloseGFVenta,
     required this.precioGFVenta,
-    required this.precioRecetaVenta,
+    required this.costoRecetaVenta,
     required this.pctjGananciaVenta,
+    required this.montoGananciaVenta,
     required this.precioPorProductoVenta,
+    required this.precioFinalVenta,
   });
 
   // Sobrescribe el método toString para proporcionar una representación en cadena del objeto
   @override
   String toString() {
-    return 'Venta(nombreVenta: $nombreVenta, horaVenta: $horaVenta, fechaVenta: $fechaVenta, productoVenta: $productoVenta, cantidadVenta: $cantidadVenta, pctjGFVenta: $pctjGFVenta, desgloseGFVenta: $desgloseGFVenta, precioGFVenta: $precioGFVenta, precioRecetaVenta: $precioRecetaVenta, pctjGananciaVenta: $pctjGananciaVenta, precioPorProductoVenta: $precioPorProductoVenta)';
+    return 'Venta(nombreVenta: $nombreVenta, horaVenta: $horaVenta, fechaVenta: $fechaVenta, productoVenta: $productoVenta, cantidadVenta: $cantidadVenta, pctjGFVenta: $pctjGFVenta, desgloseGFVenta: $desgloseGFVenta, precioGFVenta: $precioGFVenta, costoRecetaVenta: $costoRecetaVenta, pctjGananciaVenta: $pctjGananciaVenta, montoGananciaVenta: $montoGananciaVenta, precioPorProductoVenta: $precioPorProductoVenta, precioFinalVenta: $precioFinalVenta)';
   }
 
   // Método para convertir el objeto en un mapa
@@ -222,9 +226,11 @@ class Venta {
       'pctjGFVenta': pctjGFVenta,
       'desgloseGFVenta': desgloseGFVenta,
       'precioGFVenta': precioGFVenta,
-      'precioRecetaVenta': precioRecetaVenta,
+      'costoRecetaVenta': costoRecetaVenta,
       'pctjGananciaVenta': pctjGananciaVenta,
+      'montoGananciaVenta': montoGananciaVenta,
       'precioPorProductoVenta': precioPorProductoVenta,
+      'precioFinalVenta': precioFinalVenta,
     };
   }
 
@@ -240,9 +246,11 @@ class Venta {
       pctjGFVenta: map['pctjGFVenta'],
       desgloseGFVenta: map['desgloseGFVenta'],
       precioGFVenta: map['precioGFVenta'],
-      precioRecetaVenta: map['precioRecetaVenta'],
+      costoRecetaVenta: map['costoRecetaVenta'],
       pctjGananciaVenta: map['pctjGananciaVenta'],
+      montoGananciaVenta: map['montoGananciaVenta'],
       precioPorProductoVenta: map['precioPorProductoVenta'],
+      precioFinalVenta: map['precioFinalVenta'],
     );
   }
 }
