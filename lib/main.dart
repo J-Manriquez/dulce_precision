@@ -1,5 +1,6 @@
 import 'package:dulce_precision/database/providers/gastosFijos_provider.dart';
 import 'package:dulce_precision/screens/productos/agregar_producto_sc.dart';
+import 'package:dulce_precision/screens/ventas/agregar_venta_sc.dart';
 import 'package:dulce_precision/utils/funciones/ejecutar2doPlano.dart';
 import 'package:dulce_precision/menus/customNavigationBar.dart';
 import 'package:dulce_precision/menus/menuProductos.dart';
@@ -96,7 +97,7 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     _pages.addAll([
       const ProductosScreen(),
-      const HomeScreen(),
+      const VentasScreen(),
       const RecetasScreen(),
     ]);
   }
@@ -133,6 +134,21 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  // Método para navegar a InsertarVentasScreen
+  void _navegarAInsertarVentas(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AgregarVentaSC(),
+      ),
+    ).then((value) => {
+          // Luego de regresar, actualiza la lista de recetas
+          Provider.of<VentasProvider>(context, listen: false)
+              .obtenerVentas()
+        },);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final themeModel =
@@ -163,6 +179,7 @@ class _MainScreenState extends State<MainScreen> {
                 size: fontSizeModel.iconSize,
                 color: themeModel.primaryIconColor),
             onPressed: () {
+              _navegarAInsertarVentas(context);
             },
           ),
           const MenuVentas(), // Menú flotante para Ventas
