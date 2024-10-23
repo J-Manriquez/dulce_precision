@@ -126,7 +126,7 @@ class _VentasScreenState extends State<VentasScreen> {
                               mostrarDetalleVentaModal(context, venta.idVenta!);
                             },
                             child: Text(
-                              'Ver',
+                              ' Ver ',
                               style: TextStyle(
                                 fontSize: fontSizeModel
                                     .textSize, // Tamaño de texto dinámico
