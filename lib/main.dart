@@ -51,7 +51,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // Instancia del logger
-  final CustomLogger customLogger = CustomLogger();
+  // final CustomLogger customLogger = CustomLogger();
 
   MyApp({super.key});
 
@@ -64,16 +64,14 @@ class MyApp extends StatelessWidget {
         primarySwatch:
             Colors.blue, // Establece el tema principal de la app (colores)
       ),
-      home: MainScreen(customLogger: customLogger), // Pasar customLogger
+      home: MainScreen(),
     );
   }
 }
 
 class MainScreen extends StatefulWidget {
-  final CustomLogger customLogger; // Agregar este campo
   const MainScreen(
-      {super.key,
-      required this.customLogger}); // Asegúrate de requerir el parámetro
+      {super.key}); // Asegúrate de requerir el parámetro
 
   @override
   State<MainScreen> createState() => _MainScreenState();

@@ -48,7 +48,8 @@ class DatabaseHelper {
                     precioProducto REAL NOT NULL, -- Precio del producto
                     cantidadProducto REAL NOT NULL, -- Cantidad disponible del producto
                     tipoUnidadProducto TEXT NOT NULL, -- Unidad del producto (ej. kg, litros)
-                    cantidadUnidadesProducto REAL NOT NULL -- Cantidad por unidad
+                    cantidadUnidadesProducto REAL NOT NULL, -- Cantidad por unidad
+                    cantidadOriginalProducto REAL NOT NULL -- Cantidad original del producto
                   );
                 ''');
             CustomLogger().logInfo('Tabla Productos creada correctamente');

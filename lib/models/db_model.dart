@@ -5,6 +5,7 @@ class Producto {
   final double cantidadProducto;
   final String tipoUnidadProducto;
   final double cantidadUnidadesProducto;
+  final double cantidadOriginalProducto;
 
   // Constructor
   Producto({
@@ -14,12 +15,13 @@ class Producto {
     required this.cantidadProducto,
     required this.tipoUnidadProducto,
     required this.cantidadUnidadesProducto,
+    required this.cantidadOriginalProducto,
   });
 
   // Sobrescribe el método toString para proporcionar una representación en cadena del objeto
   @override
   String toString() {
-    return 'Producto(nombreProducto: $nombreProducto, precioProducto: $precioProducto, cantidadProducto: $cantidadProducto, tipoUnidadProducto: $tipoUnidadProducto, cantidadUnidadesProducto: $cantidadUnidadesProducto)';
+    return 'Producto(nombreProducto: $nombreProducto, precioProducto: $precioProducto, cantidadProducto: $cantidadProducto, tipoUnidadProducto: $tipoUnidadProducto, cantidadUnidadesProducto: $cantidadUnidadesProducto, cantidadOriginalProducto: $cantidadOriginalProducto)';
   }
 
   // Método para convertir el objeto en un mapa
@@ -31,6 +33,7 @@ class Producto {
       'cantidadProducto': cantidadProducto,
       'tipoUnidadProducto': tipoUnidadProducto,
       'cantidadUnidadesProducto': cantidadUnidadesProducto,
+      'cantidadOriginalProducto': cantidadOriginalProducto,
     };
   }
 
@@ -43,6 +46,7 @@ class Producto {
       cantidadProducto: map['cantidadProducto'],
       tipoUnidadProducto: map['tipoUnidadProducto'],
       cantidadUnidadesProducto: map['cantidadUnidadesProducto'],
+      cantidadOriginalProducto: map['cantidadOriginalProducto'],
     );
   }
 }

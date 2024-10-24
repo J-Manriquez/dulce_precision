@@ -25,6 +25,6 @@ Future<void> runBackgroundTasks() async {
 
   MetodosRepository metodosRepository = MetodosRepository();
    // Función para borrar la base de datos
-  // await metodosRepository.eliminarDatabase();
+// // //  // await metodosRepository.eliminarDatabase();
   await metodosRepository.getTableContent('ventas');
 }

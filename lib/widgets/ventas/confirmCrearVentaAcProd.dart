@@ -1,3 +1,4 @@
+import 'package:dulce_precision/main.dart';
 import 'package:dulce_precision/screens/ventas/ventas_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -131,7 +132,7 @@ class ConfirmarActualizacionProductosDialog {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          const VentasScreen(),
+                                          const MainScreen(),
                                     ),
                                   );
                                 }

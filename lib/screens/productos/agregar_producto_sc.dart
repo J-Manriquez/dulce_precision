@@ -41,6 +41,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
         cantidadProducto: widget.producto!.cantidadProducto,
         tipoUnidadProducto: widget.producto!.tipoUnidadProducto,
         cantidadUnidadesProducto: widget.producto!.cantidadUnidadesProducto,
+        cantidadOriginalProducto: widget.producto!.cantidadOriginalProducto,
       );
 
       // Llenar los campos con los datos del producto
@@ -109,6 +110,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
       cantidadProducto: cantidadProducto,
       tipoUnidadProducto: _tipoUnidadSeleccionada,
       cantidadUnidadesProducto: cantidadUnidadesProducto,
+      cantidadOriginalProducto: cantidadProducto,
     );
 
     try {

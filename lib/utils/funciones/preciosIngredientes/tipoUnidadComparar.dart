@@ -29,14 +29,14 @@ Future<List<Map<String, dynamic>>> compararTipoUnidad(
     bool tiposCompatibles =
         false; // Indica si los tipos de unidad son compatibles
     double cantidadProductoTransformada =
-        producto.cantidadProducto; // Cantidad del producto transformada
+        producto.cantidadOriginalProducto; // Cantidad del producto transformada
     String tipoUnidad; // Tipo de unidad del producto
 
     // Comparamos los tipos de unidad
     if (producto.tipoUnidadProducto == ingrediente.tipoUnidadIngrediente) {
       tiposIguales = true; // Tipos iguales
       cantidadProductoTransformada =
-          producto.cantidadProducto; // No se realiza transformación
+          producto.cantidadOriginalProducto; // No se realiza transformación
       tipoUnidad = producto.tipoUnidadProducto; // Tipo de unidad original
     } else {
       // Comprobamos si son compatibles
@@ -47,19 +47,19 @@ Future<List<Map<String, dynamic>>> compararTipoUnidad(
         if (producto.tipoUnidadProducto == 'kilogramos' &&
             ingrediente.tipoUnidadIngrediente == 'gramos') {
           cantidadProductoTransformada =
-              producto.cantidadProducto * 1000; // Multiplicamos por 1000
+              producto.cantidadOriginalProducto * 1000; // Multiplicamos por 1000
         } else if (producto.tipoUnidadProducto == 'gramos' &&
             ingrediente.tipoUnidadIngrediente == 'kilogramos') {
           cantidadProductoTransformada =
-              producto.cantidadProducto / 1000; // Dividimos por 1000
+              producto.cantidadOriginalProducto / 1000; // Dividimos por 1000
         } else if (producto.tipoUnidadProducto == 'litros' &&
             ingrediente.tipoUnidadIngrediente == 'mililitros') {
           cantidadProductoTransformada =
-              producto.cantidadProducto * 1000; // Multiplicamos por 1000
+              producto.cantidadOriginalProducto * 1000; // Multiplicamos por 1000
         } else if (producto.tipoUnidadProducto == 'mililitros' &&
             ingrediente.tipoUnidadIngrediente == 'litros') {
           cantidadProductoTransformada =
-              producto.cantidadProducto / 1000; // Dividimos por 1000
+              producto.cantidadOriginalProducto / 1000; // Dividimos por 1000
         }
         tipoUnidad =
             ingrediente.tipoUnidadIngrediente; // Tipo de unidad del ingrediente
