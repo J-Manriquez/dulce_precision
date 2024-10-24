@@ -5,6 +5,7 @@ import 'package:dulce_precision/widgets/ventas/cards_obtenerGF.dart';
 import 'package:dulce_precision/widgets/ventas/cards_obtenerRecetas.dart';
 import 'package:dulce_precision/models/db_model.dart';
 import 'package:dulce_precision/widgets/customTextField_ventas.dart';
+import 'package:dulce_precision/widgets/ventas/confirmCrearVentaAcProd.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -91,8 +92,11 @@ class _AgregarVentaSCState extends State<AgregarVentaSC> {
             IconButton(
               icon: const Icon(Icons.save),
               onPressed: () async {
-                await _guardarDatosVenta();
-                Navigator.of(context).pop();
+                await ConfirmarActualizacionProductosDialog.mostrarModal(
+                  context,
+                  _recetaSeleccionada!.idReceta!,
+                  () => _guardarDatosVenta(),
+                ); // Pasa el ID de la receta al modal
               },
               color: themeModel.primaryTextColor,
             ),

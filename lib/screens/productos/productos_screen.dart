@@ -122,7 +122,10 @@ class _ProductosScreenState extends State<ProductosScreen> {
                               ),
                             ),
                             Text(
-                              'Cantidad de Producto: \n${producto.cantidadProducto.round()} ${producto.tipoUnidadProducto}',
+                              // 'Cantidad de Producto: \n${producto.cantidadProducto.round()} ${producto.tipoUnidadProducto}',
+                              (producto.cantidadProducto == 0.0 || producto.cantidadProducto >= 1.0)
+                              ? 'Cantidad de Producto: \n${producto.cantidadProducto.round()} ${producto.tipoUnidadProducto}'
+                              : 'Cantidad de Producto: \n${producto.cantidadProducto.toStringAsFixed(2)} ${producto.tipoUnidadProducto}',
                               style: TextStyle(
                                 fontSize: fontSizeModel.textSize,
                                 color: themeModel.secondaryTextColor,

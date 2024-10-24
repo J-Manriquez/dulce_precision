@@ -1,3 +1,4 @@
+import 'package:dulce_precision/screens/productos/productos_screen.dart';
 import 'package:dulce_precision/utils/funciones/preciosIngredientes/ingredientesCalcularCostos.dart';
 import 'package:dulce_precision/utils/funciones/preciosRecetas/recetasCalcularCostos.dart';
 import 'package:dulce_precision/widgets/confirmGenerica_widget.dart';
@@ -152,15 +153,18 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
     );
     if (confirm) {
       await restaurarProducto();
-      Navigator.of(context).pop();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProductosScreen(),
+        ),
+      );
       if (mounted) {
         // Verificamos si el widget sigue montado antes de acceder al contexto
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('No se guardaron los cambios')));
       }
-    } else {
-      Navigator.of(context).pop();
-    }
+    } 
   }
 
   @override

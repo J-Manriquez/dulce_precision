@@ -90,9 +90,11 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
 
   // Construye el ListTile para cada receta
   ListTile _buildListTile(Receta receta, int index, String estado) {
+    final themeModel = Provider.of<ThemeModel>(context);
+    final fontSizeModel = Provider.of<FontSizeModel>(context);
     // Verificar si el costo es válido y mayor que 0
     final isValidCost = (double.tryParse(receta.costoReceta!) ?? 0) > 0;
-    
+
     return ListTile(
       leading: Radio<int>(
         value: receta.idReceta!,
@@ -102,7 +104,8 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
             // Muestra un SnackBar si la receta no está disponible
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('No se pueden seleccionar recetas no disponibles'),
+                content:
+                    Text('No se pueden seleccionar recetas no disponibles'),
               ),
             );
           } else {
@@ -111,6 +114,9 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
             });
           }
         },
+        fillColor: WidgetStateColor.resolveWith(
+            (states) => themeModel.primaryButtonColor), // Cambia el color aquí
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
       title: Text(
         receta.nombreReceta,
@@ -123,7 +129,7 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
           IconButton(
             icon: Icon(
               _expandedIndex == index ? Icons.visibility : Icons.visibility_off,
-              color: Colors.blueAccent,
+              color: themeModel.primaryButtonColor,
               size: 24,
             ),
             onPressed: () {
@@ -151,27 +157,6 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
   }
 
   // // Construye los detalles de la receta
-  // Padding _buildDetails(Receta receta) {
-  //   final themeModel = Provider.of<ThemeModel>(context);
-  //   final fontSizeModel = Provider.of<FontSizeModel>(context);
-
-  //   return Padding(
-  //     padding: const EdgeInsets.all(16.0),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         const Text('Descripción:',
-  //             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-  //         const SizedBox(height: 8),
-  //         Text(
-  //           receta.descripcionReceta ?? 'Sin descripción',
-  //           style: const TextStyle(fontSize: 14, color: Colors.black54),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Padding _buildDetails(Receta receta) {
     final themeModel = Provider.of<ThemeModel>(context);
     final fontSizeModel = Provider.of<FontSizeModel>(context);
@@ -210,9 +195,15 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
             );
           }
 
-          // Separar ingredientes en dos listas según el tipo de costo
+          // Separar ingredientes en tres listas: con costo, con costo 0 y sin costo numérico
           final ingredientesConCosto = ingredientes
-              .where((ing) => (double.tryParse(ing.costoIngrediente)) != null)
+              .where((ing) =>
+                  (double.tryParse(ing.costoIngrediente) != null) &&
+                  double.parse(ing.costoIngrediente) > 0)
+              .toList();
+
+          final ingredientesCostoCero = ingredientes
+              .where((ing) => double.tryParse(ing.costoIngrediente) == 0.0)
               .toList();
 
           final ingredientesSinCosto = ingredientes
@@ -301,10 +292,61 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
                   ),
                 ),
               ],
+              // Listado de ingredientes con costo 0
+              if (ingredientesCostoCero.isNotEmpty) ...[
+                const SizedBox(height: 16),
+                Text(
+                  '• Ingredientes con costo 0',
+                  style: TextStyle(
+                    fontSize: fontSizeModel.textSize - 2,
+                    color: themeModel.secondaryTextColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: ingredientesCostoCero.length,
+                  itemBuilder: (context, index) {
+                    final ingrediente = ingredientesCostoCero[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 12.0, top: 4.0),
+                            child: Text(
+                              '• ${ingrediente.nombreIngrediente}',
+                              style: TextStyle(
+                                fontSize: fontSizeModel.textSize - 2,
+                                color: themeModel.secondaryTextColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12.0, top: 4.0),
+                  child: Text(
+                    'Que el costo de ingredientes sea 0, significa que el producto con el mismo nombre no tiene precio',
+                    style: TextStyle(
+                      fontSize: fontSizeModel.textSize - 2,
+                      color: themeModel.secondaryTextColor,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ],
               // Listado de ingredientes sin costo numérico
               if (ingredientesSinCosto.isNotEmpty) ...[
                 const SizedBox(height: 16),
-                if (ingredientesConCosto.isNotEmpty)
+                if (ingredientesConCosto.isNotEmpty ||
+                    ingredientesCostoCero.isNotEmpty)
                   Container(
                     width: double.infinity,
                     height: 1,
@@ -323,7 +365,7 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '- ${ingrediente.nombreIngrediente}:',
+                            '• ${ingrediente.nombreIngrediente}:',
                             style: TextStyle(
                               fontSize: fontSizeModel.textSize - 2,
                               color: themeModel.secondaryTextColor,
@@ -371,9 +413,10 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
     // Corregimos la verificación
     bool isSelectedRecetaAvailable = false;
     if (_selectedRecetaId != null) {
-      final selectedReceta = Provider.of<RecetasProvider>(context, listen: false)
-          .recetas
-          .firstWhere((receta) => receta.idReceta == _selectedRecetaId);
+      final selectedReceta =
+          Provider.of<RecetasProvider>(context, listen: false)
+              .recetas
+              .firstWhere((receta) => receta.idReceta == _selectedRecetaId);
       final cost = double.tryParse(selectedReceta.costoReceta!) ?? 0;
       isSelectedRecetaAvailable = cost > 0;
     }
@@ -402,7 +445,7 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
         ),
       ),
     );
-}
+  }
 
   // Confirma la selección de la receta
   // Modificamos _confirmSelection para usar el callback
@@ -432,20 +475,6 @@ class _ObtenerRecetasWGState extends State<ObtenerRecetasWG> {
       );
     }
   }
-  // void _confirmSelection() {
-  //   if (_selectedRecetaId != null) {
-  //     // Busca la receta seleccionada en el proveedor
-  //     Receta selectedReceta = Provider.of<RecetasProvider>(context, listen: false)
-  //         .recetas
-  //         .firstWhere((receta) => receta.idReceta == _selectedRecetaId);
-  //     widget.onRecetaConfirmada(selectedReceta); // Llama al callback con la receta seleccionada
-  //   } else {
-  //     // Muestra un SnackBar si no hay receta seleccionada
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(content: Text('Por favor, selecciona una receta')),
-  //     );
-  //   }
-  // }
 
   // Determina el estado de la receta según su costo
   String _determinarEstadoReceta(String? costoReceta) {

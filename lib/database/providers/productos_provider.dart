@@ -13,6 +13,25 @@ class ProductosProvider with ChangeNotifier {
   List<Producto> get productos =>
       _productos; // Getter para la lista de productos
 
+
+    // Método para actualizar un producto
+  Future<void> actualizarProducto(Producto producto) async {
+    try {
+      // Actualiza el producto en la base de datos usando el repositorio
+      await _productRepository.actualizarProducto(producto);
+      
+      // Vuelve a obtener la lista actualizada de productos
+      await obtenerProductos();
+
+      // Notifica a los listeners que los datos han cambiado
+      notifyListeners();
+    } catch (e) {
+      // Registro de errores usando CustomLogger
+      CustomLogger().logError('Error al actualizar producto: $e');
+      throw Exception("Error al actualizar producto"); // Lanzamos una excepción para manejo externo
+    }
+  }
+
   // Método para obtener productos desde la base de datos
   Future<void> obtenerProductos() async {
     try {
