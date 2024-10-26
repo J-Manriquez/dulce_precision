@@ -115,7 +115,7 @@ class _ProductosScreenState extends State<ProductosScreen> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              (producto.cantidadProducto % 1 == 0)
+                              (producto.precioProducto % 1 == 0)
                                   ? 'Precio: \$${producto.precioProducto.toInt()}'
                                   : 'Precio: \$${producto.precioProducto.toStringAsFixed(1)}',
                               style: TextStyle(
