@@ -1,9 +1,9 @@
 // Importa las dependencias necesarias
+import 'package:dulce_precision/database/providers/ventas_provider.dart';
 import 'package:dulce_precision/models/font_size_model.dart';
 import 'package:dulce_precision/models/theme_model.dart';
+import 'package:dulce_precision/widgets/confirmGenerica_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:dulce_precision/screens/settings/settings_screen.dart'; // Importa la pantalla de configuraciones
-import 'package:dulce_precision/screens/recetas/recetas_screen.dart';
 import 'package:provider/provider.dart'; // Importa la pantalla de recetas
 
 class MenuVentas extends StatelessWidget {
@@ -18,25 +18,44 @@ class MenuVentas extends StatelessWidget {
       // Ícono de tres puntos verticales que activa el menú
       icon: Icon(Icons.more_vert, size: fontSizeModel.iconSize,
                 color:  themeModel.primaryIconColor ),
-      onSelected: (int value) {
+      onSelected: (int value) async {
         // Maneja la selección del menú con base en el valor
         switch (value) {
           case 1:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SettingsScreen(),
-              ),
-            ); // Navega a la pantalla de configuraciones
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => const SettingsScreen(),
+            //   ),
+            // ); // Navega a la pantalla de configuraciones
             break;
           case 2:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RecetasScreen(),
-              ),
-            ); // Navega a la pantalla de recetas
-            break;
+            // Muestra el modal de confirmación y espera la respuesta
+            var msj = '¿Estás seguro de que deseas eliminar todas las ventas?';
+            final confirmacion = await ConfirmDialog.mostrarConfirmacion(context, msj);
+
+            if (confirmacion == true) {
+              // Si el usuario confirma la eliminación
+              try {
+                // Llamamos al método para eliminar todo el contenido de la tabla 'recetas'
+                // await recetasProvider.eliminarContenidoTablaRecetas();
+                // Supongamos que tienes un botón o acción que llama a este método
+                await Provider.of<VentasProvider>(context, listen: false)
+                    .eliminarContenidoTablaVentas();
+
+                // Muestra un mensaje de éxito si es necesario
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('Todas las Ventas han sido eliminadas.')),
+                );
+              } catch (e) {
+                // Manejo del error
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error al eliminar las Ventas: $e')),
+                );
+              }
+            }
+            break;// Navega a la pantalla de recetas
         }
       },
       itemBuilder: (BuildContext context) {
@@ -48,7 +67,7 @@ class MenuVentas extends StatelessWidget {
           PopupMenuItem<int>(
             value: 1, // Valor que se pasa al onSelected cuando se selecciona
             child: Text(
-              'Historial de ventas', 
+              '', 
               style: TextStyle(
                 fontSize: fontSizeModel.textSize,
                 color:  themeModel.secondaryTextColor 
