@@ -115,7 +115,9 @@ class _ProductosScreenState extends State<ProductosScreen> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Precio: \$${producto.precioProducto.round()}',
+                              (producto.cantidadProducto % 1 == 0)
+                                  ? 'Precio: \$${producto.precioProducto.toInt()}'
+                                  : 'Precio: \$${producto.precioProducto.toStringAsFixed(1)}',
                               style: TextStyle(
                                 fontSize: fontSizeModel.textSize,
                                 color: themeModel.secondaryTextColor,
@@ -123,16 +125,18 @@ class _ProductosScreenState extends State<ProductosScreen> {
                             ),
                             Text(
                               // 'Cantidad de Producto: \n${producto.cantidadProducto.round()} ${producto.tipoUnidadProducto}',
-                              (producto.cantidadProducto == 0.0 || producto.cantidadProducto >= 1.0)
-                              ? 'Cantidad de Producto: \n${producto.cantidadProducto.round()} ${producto.tipoUnidadProducto}'
-                              : 'Cantidad de Producto: \n${producto.cantidadProducto.toStringAsFixed(2)} ${producto.tipoUnidadProducto}',
+                              (producto.cantidadProducto % 1 == 0)
+                                  ? 'Cantidad de Producto: \n${producto.cantidadProducto.toInt()} ${producto.tipoUnidadProducto}'
+                                  : 'Cantidad de Producto: \n${producto.cantidadProducto.toStringAsFixed(1)} ${producto.tipoUnidadProducto}',
                               style: TextStyle(
                                 fontSize: fontSizeModel.textSize,
                                 color: themeModel.secondaryTextColor,
                               ),
                             ),
                             Text(
-                              'Cantidad de unidades: ${producto.cantidadUnidadesProducto.round()}',
+                              // 'Cantidad de unidades: ${producto.cantidadUnidadesProducto.round()}',
+                              'Cantidad de unidades: ${producto.cantidadUnidadesProducto % 1 == 0 ? producto.cantidadUnidadesProducto.toInt() : producto.cantidadUnidadesProducto.toStringAsFixed(1)}',
+
                               style: TextStyle(
                                 fontSize: fontSizeModel.textSize,
                                 color: themeModel.secondaryTextColor,

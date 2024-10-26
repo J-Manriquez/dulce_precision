@@ -78,7 +78,7 @@ Future<void> mostrarContenidoRecetaModal(
                                     vertical:
                                         2), // Padding para cada ingrediente
                                 child: Text(
-                                  '- ${ingrediente.cantidadIngrediente} ${ingrediente.tipoUnidadIngrediente} de ${ingrediente.nombreIngrediente}',
+                                  '- ${ingrediente.cantidadIngrediente.round()} ${ingrediente.tipoUnidadIngrediente} de ${ingrediente.nombreIngrediente}',
                                   style: TextStyle(
                                       fontSize: fontSizeModel.textSize,
                                       color: themeModel.primaryTextColor),

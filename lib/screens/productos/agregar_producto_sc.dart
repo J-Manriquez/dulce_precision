@@ -46,10 +46,26 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
 
       // Llenar los campos con los datos del producto
       _nombreController.text = widget.producto!.nombreProducto;
-      _precioController.text = widget.producto!.precioProducto.toString();
-      _cantidadController.text = widget.producto!.cantidadProducto.toString();
+      // _precioController.text = widget.producto!.precioProducto.toString();
+      // _cantidadController.text = widget.producto!.cantidadProducto.toString();
+      // _cantidadUnidadController.text =
+      //     widget.producto!.cantidadUnidadesProducto.toString();
+      // Verifica y asigna el precio
+      _precioController.text = widget.producto!.precioProducto % 1 == 0
+          ? widget.producto!.precioProducto.toInt().toString()
+          : widget.producto!.precioProducto.toStringAsFixed(1);
+
+      // Verifica y asigna la cantidad
+      _cantidadController.text = widget.producto!.cantidadProducto % 1 == 0
+          ? widget.producto!.cantidadProducto.toInt().toString()
+          : widget.producto!.cantidadProducto.toStringAsFixed(1);
+
+      // Verifica y asigna la cantidad de unidades
       _cantidadUnidadController.text =
-          widget.producto!.cantidadUnidadesProducto.toString();
+          widget.producto!.cantidadUnidadesProducto % 1 == 0
+              ? widget.producto!.cantidadUnidadesProducto.toInt().toString()
+              : widget.producto!.cantidadUnidadesProducto.toStringAsFixed(1);
+
       _tipoUnidadSeleccionada = widget.producto!.tipoUnidadProducto;
     }
   }
@@ -166,7 +182,7 @@ class _InsertProductScreenState extends State<InsertarProductosScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('No se guardaron los cambios')));
       }
-    } 
+    }
   }
 
   @override
