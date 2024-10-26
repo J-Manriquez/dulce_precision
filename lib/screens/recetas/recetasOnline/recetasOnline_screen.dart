@@ -20,6 +20,7 @@ class _RecetarioOnlineScreenState extends State<RecetarioOnlineScreen> {
   final RecetaRepository recetaRepository = RecetaRepository();
   final IngredienteRecetaRepository ingredienteRecetaRepository =
       IngredienteRecetaRepository();
+  final RecetasProvider recetasProvider = RecetasProvider();
 
   // Lista de recetas inicializada como una lista vacía
   List<Receta> recetas = [];
@@ -36,7 +37,7 @@ class _RecetarioOnlineScreenState extends State<RecetarioOnlineScreen> {
     setState(() {
       recetas = [
         Receta(
-          idReceta: 1,
+          idReceta: 187676565445354,
           nombreReceta: 'Pie de Limón',
           costoReceta: "0",
           descripcionReceta: '''Masa:
@@ -58,7 +59,7 @@ Merengue:
 Montar y listo. ''',
         ),
         Receta(
-          idReceta: 2,
+          idReceta: 187676565445355,
           nombreReceta: 'Para 60 galletas',
           costoReceta: "0",
           descripcionReceta:
@@ -91,8 +92,7 @@ Montar y listo. ''',
             ingredientes, recetas[index].idReceta!);
         CustomLogger()
             .logInfo('Receta y sus ingredientes insertados correctamente');
-      Provider.of<RecetasProvider>(context, listen: false).obtenerRecetas();
-
+        Provider.of<RecetasProvider>(context, listen: false).obtenerRecetas();
       } catch (e) {
         CustomLogger().logError('Error al insertar receta: $e');
       }
@@ -102,118 +102,103 @@ Montar y listo. ''',
   }
 
   List<IngredienteReceta> _getIngredientsForRecipe(int index) {
-  // Verificar cuál receta se está seleccionando y devolver los ingredientes correspondientes
-  if (index == 0) {
-    // Ingredientes para la primera receta (Pie de Limón)
-    return [
-      IngredienteReceta(
-          idIngrediente: 1,
-          nombreIngrediente: 'Harina',
-          costoIngrediente: "0",
-          cantidadIngrediente: 300.0,
-          tipoUnidadIngrediente: 'gramos',
-          idReceta: 1),
-      IngredienteReceta(
-          idIngrediente: 2,
-          nombreIngrediente: 'Azúcar',
-          costoIngrediente: "0",
-          cantidadIngrediente: 300.0,
-          tipoUnidadIngrediente: 'gramos',
-          idReceta: 1),
-      IngredienteReceta(
-          idIngrediente: 3,
-          nombreIngrediente: 'Huevos',
-          costoIngrediente: "0",
-          cantidadIngrediente: 3.0,
-          tipoUnidadIngrediente: 'unidad',
-          idReceta: 1),
-      IngredienteReceta(
-          idIngrediente: 4,
-          nombreIngrediente: 'Margarina',
-          costoIngrediente: "0",
-          cantidadIngrediente: 70.0,
-          tipoUnidadIngrediente: 'gramos',
-          idReceta: 1),
-      IngredienteReceta(
-          idIngrediente: 5,
-          nombreIngrediente: 'Leche condensada',
-          costoIngrediente: "0",
-          cantidadIngrediente: 1.0,
-          tipoUnidadIngrediente: 'unidad',
-          idReceta: 1),
-      IngredienteReceta(
-          idIngrediente: 6,
-          nombreIngrediente: 'Polvos de Hornear',
-          costoIngrediente: "0",
-          cantidadIngrediente: 45.0,
-          tipoUnidadIngrediente: 'gramos',
-          idReceta: 1),
-      IngredienteReceta(
-          idIngrediente: 7,
-          nombreIngrediente: 'Limones',
-          costoIngrediente: "0",
-          cantidadIngrediente: 3.0,
-          tipoUnidadIngrediente: 'unidad',
-          idReceta: 1),
-    ];
-  } else if (index == 1) {
-    // Ingredientes para la segunda receta (Para 60 galletas)
-    return [
-      IngredienteReceta(
-          idIngrediente: 8,
-          nombreIngrediente: 'Harina',
-          costoIngrediente: "0",
-          cantidadIngrediente: 900.0,
-          tipoUnidadIngrediente: 'gramos',
-          idReceta: 2),
-      IngredienteReceta(
-          idIngrediente: 9,
-          nombreIngrediente: 'Azúcar',
-          costoIngrediente: "0",
-          cantidadIngrediente: 360.0,
-          tipoUnidadIngrediente: 'gramos',
-          idReceta: 2),
-      IngredienteReceta(
-          idIngrediente: 10,
-          nombreIngrediente: 'Aceite',
-          costoIngrediente: "0",
-          cantidadIngrediente: 240.0,
-          tipoUnidadIngrediente: 'mililitros',
-          idReceta: 2),
-      IngredienteReceta(
-          idIngrediente: 11,
-          nombreIngrediente: 'Sal',
-          costoIngrediente: "0",
-          cantidadIngrediente: 15.0,
-          tipoUnidadIngrediente: 'gramos',
-          idReceta: 2),
-      IngredienteReceta(
-          idIngrediente: 12,
-          nombreIngrediente: 'Huevos',
-          costoIngrediente: "0",
-          cantidadIngrediente: 6.0,
-          tipoUnidadIngrediente: 'unidad',
-          idReceta: 2),
-      IngredienteReceta(
-          idIngrediente: 13,
-          nombreIngrediente: 'Esencia de Vainilla',
-          costoIngrediente: "0",
-          cantidadIngrediente: 45.0,
-          tipoUnidadIngrediente: 'mililitros',
-          idReceta: 2),
-      IngredienteReceta(
-          idIngrediente: 14,
-          nombreIngrediente: 'Polvos de Hornear',
-          costoIngrediente: "0",
-          cantidadIngrediente: 45.0,
-          tipoUnidadIngrediente: 'gramos',
-          idReceta: 2),
-    ];
+    // Verificar cuál receta se está seleccionando y devolver los ingredientes correspondientes
+    if (index == 0) {
+      // Ingredientes para la primera receta (Pie de Limón)
+      return [
+        IngredienteReceta(
+            nombreIngrediente: 'Harina',
+            costoIngrediente: "0",
+            cantidadIngrediente: 300.0,
+            tipoUnidadIngrediente: 'gramos',
+            idReceta: 187676565445354),
+        IngredienteReceta(
+            nombreIngrediente: 'Azúcar',
+            costoIngrediente: "0",
+            cantidadIngrediente: 300.0,
+            tipoUnidadIngrediente: 'gramos',
+            idReceta: 187676565445354),
+        IngredienteReceta(
+            nombreIngrediente: 'Huevos',
+            costoIngrediente: "0",
+            cantidadIngrediente: 3.0,
+            tipoUnidadIngrediente: 'unidad',
+            idReceta: 187676565445354),
+        IngredienteReceta(
+            nombreIngrediente: 'Margarina',
+            costoIngrediente: "0",
+            cantidadIngrediente: 70.0,
+            tipoUnidadIngrediente: 'gramos',
+            idReceta: 187676565445354),
+        IngredienteReceta(
+            nombreIngrediente: 'Leche condensada',
+            costoIngrediente: "0",
+            cantidadIngrediente: 1.0,
+            tipoUnidadIngrediente: 'unidad',
+            idReceta: 187676565445354),
+        IngredienteReceta(
+            nombreIngrediente: 'Polvos de Hornear',
+            costoIngrediente: "0",
+            cantidadIngrediente: 45.0,
+            tipoUnidadIngrediente: 'gramos',
+            idReceta: 187676565445354),
+        IngredienteReceta(
+            nombreIngrediente: 'Limones',
+            costoIngrediente: "0",
+            cantidadIngrediente: 3.0,
+            tipoUnidadIngrediente: 'unidad',
+            idReceta: 187676565445354),
+      ];
+    } else if (index == 1) {
+      // Ingredientes para la segunda receta (Para 60 galletas)
+      return [
+        IngredienteReceta(
+            nombreIngrediente: 'Harina',
+            costoIngrediente: "0",
+            cantidadIngrediente: 900.0,
+            tipoUnidadIngrediente: 'gramos',
+            idReceta: 187676565445355),
+        IngredienteReceta(
+            nombreIngrediente: 'Azúcar',
+            costoIngrediente: "0",
+            cantidadIngrediente: 360.0,
+            tipoUnidadIngrediente: 'gramos',
+            idReceta: 187676565445355),
+        IngredienteReceta(
+            nombreIngrediente: 'Aceite',
+            costoIngrediente: "0",
+            cantidadIngrediente: 240.0,
+            tipoUnidadIngrediente: 'mililitros',
+            idReceta: 187676565445355),
+        IngredienteReceta(
+            nombreIngrediente: 'Sal',
+            costoIngrediente: "0",
+            cantidadIngrediente: 15.0,
+            tipoUnidadIngrediente: 'gramos',
+            idReceta: 187676565445355),
+        IngredienteReceta(
+            nombreIngrediente: 'Huevos',
+            costoIngrediente: "0",
+            cantidadIngrediente: 6.0,
+            tipoUnidadIngrediente: 'unidad',
+            idReceta: 187676565445355),
+        IngredienteReceta(
+            nombreIngrediente: 'Esencia de Vainilla',
+            costoIngrediente: "0",
+            cantidadIngrediente: 45.0,
+            tipoUnidadIngrediente: 'mililitros',
+            idReceta: 187676565445355),
+        IngredienteReceta(
+            nombreIngrediente: 'Polvos de Hornear',
+            costoIngrediente: "0",
+            cantidadIngrediente: 45.0,
+            tipoUnidadIngrediente: 'gramos',
+            idReceta: 187676565445355),
+      ];
+    }
+    // Retornar una lista vacía si el índice no corresponde a ninguna receta
+    return [];
   }
-  // Retornar una lista vacía si el índice no corresponde a ninguna receta
-  return [];
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +237,7 @@ Montar y listo. ''',
                         title: Text(
                           recetas[index].nombreReceta,
                           style: TextStyle(
-                            fontSize: fontSizeModel.titleSize*0.8,
+                            fontSize: fontSizeModel.titleSize * 0.8,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -288,7 +273,8 @@ Montar y listo. ''',
                               Text(
                                 'Ingredientes:',
                                 style: TextStyle(
-                                  fontSize: fontSizeModel.subtitleSize, // Aumentar el tamaño de la fuente
+                                  fontSize: fontSizeModel
+                                      .subtitleSize, // Aumentar el tamaño de la fuente
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -307,7 +293,8 @@ Montar y listo. ''',
                               Text(
                                 'Descripción:',
                                 style: TextStyle(
-                                  fontSize: fontSizeModel.subtitleSize, // Aumentar el tamaño de la fuente
+                                  fontSize: fontSizeModel
+                                      .subtitleSize, // Aumentar el tamaño de la fuente
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
